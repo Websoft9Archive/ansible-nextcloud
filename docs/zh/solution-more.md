@@ -55,13 +55,13 @@ Nextcloud 后台集成了 [Marketplace](https://apps.nextcloud.com) 大量的扩
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-backendmk-websoft9.png)
 2. 在线安装它
 
-### Nextcloud 集成 LDAP
+## Nextcloud 集成 LDAP
 
 当企业网盘与多个人使用的时候，用户需要与内部域控集成，以保证用户可以通过Windows账号集成。
 
 Nextcloud提供了 LDAP 集成工具，具体参考官方方案：*[User Authentication with LDAP](https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_auth_ldap.html)*
 
-### Nextcloud 命令行工具-OCC
+## Nextcloud 命令行工具-OCC
 
 OCC命令是 Nextcloud 的命令行界面。您可以使用OCC执行许多常见的服务器操作，例如安装和升级 Nextcloud，管理用户，加密，密码，LDAP设置等。
 
