@@ -1,0 +1,4 @@
+- name: PHP Version
+  debug:
+    var: php_ver.stdout
+

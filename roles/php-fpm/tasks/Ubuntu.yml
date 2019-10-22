@@ -1,0 +1,39 @@
+- name: Import PHP PPA
+  apt_repository:
+    repo: ppa:ondrej/php
+
+- name: Install PHP{{phpver}}
+  apt:
+    name: ['php{{phpver}}','php{{phpver}}-fpm','php{{phpver}}-apcu','php{{phpver}}-mcrypt','php{{phpver}}-cli','php{{phpver}}-bz2','php{{phpver}}-common','php{{phpver}}-curl','php{{phpver}}-gd','php{{phpver}}-geoip','php{{phpver}}-imagick','php{{phpver}}-imap','php{{phpver}}-intl','php{{phpver}}-json','php{{phpver}}-mbstring','php{{phpver}}-memcache','php{{phpver}}-mysql','php{{phpver}}-mongodb','php{{phpver}}-pgsql','php{{phpver}}-redis','php{{phpver}}-sqlite3','php{{phpver}}-tidy','php{{phpver}}-xml','php{{phpver}}-zip,php-pear']
+  when: phpver < 7.1
+
+- name: Install PHP{{phpver}}
+  apt:
+    name: ['php{{phpver}}','php{{phpver}}-fpm','php{{phpver}}-apcu','php{{phpver}}-cli','php{{phpver}}-bz2','php{{phpver}}-common','php{{phpver}}-curl','php{{phpver}}-gd','php{{phpver}}-geoip','php{{phpver}}-imagick','php{{phpver}}-imap','php{{phpver}}-intl','php{{phpver}}-json','php{{phpver}}-mbstring','php{{phpver}}-memcache','php{{phpver}}-mysql','php{{phpver}}-mongodb','php{{phpver}}-pgsql','php{{phpver}}-redis','php{{phpver}}-sqlite3','php{{phpver}}-tidy','php{{phpver}}-xml','php{{phpver}}-zip',php-pear]
+  when: phpver >= 7.1
+
+- name: Install Composer
+  get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /usr/bin/composer
+    mode: 0750
+
+- name: Configure PHP
+  copy:
+    src: php-ubuntu.ini
+    dest: /etc/php/{{phpver}}/fpm/php.ini
+
+- name: Restart PHP-FPM
+  service:
+    name: php{{phpver}}-fpm
+    state: restarted
+    enabled: yes
+
+- name: Create a PHP  symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: '/etc/php/{{phpver}}/fpm',dest: /data/config/php}  
+    - {src: '/var/log/php{{phpver}}-fpm.log',dest: '/data/logs/php{{phpver}}-fpm.log'}

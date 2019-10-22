@@ -1,0 +1,52 @@
+- name: nextcloud
+  hosts: local
+  connection: local
+  gather_facts: False
+  pre_tasks:
+    - name: Set Git repo
+      shell: |
+        git init
+        git config core.sparsecheckout true
+        git remote add origin https://github.com/Websoft9/ansible-roles.git
+        echo {{ item }} >> .git/info/sparse-checkout
+      args:
+        chdir: roles
+      with_items:
+        - "{{ public_roles }}"
+
+    - name: Get Public Roles
+      git:
+        repo: https://github.com/Websoft9/ansible-roles.git
+        dest: roles
+        clone: no
+
+    - name: Delete .git
+      file:
+        path: roles/.git
+        state: absent
+
+# 服务器前置任务（ubuntu使用）
+- name: nextcloud
+  hosts: nextcloud
+  become: yes
+  become_method: sudo
+  gather_facts: False
+  pre_tasks:
+    - name: Install Python
+      raw: sudo apt-get install python -y
+
+## 部署
+- name: nextcloud
+  hosts: nextcloud
+  become: yes
+  become_method: sudo
+  include_vars:
+    
+
+  roles:
+    - {role: common, tags: "common"}
+    - {role: apache, tags: "apache"}
+    - {role: mysql, tags: "mysql"}
+    - {role: php-fpm, tags: "php-fpm"}
+    - {role: phpmyadmin, tags: "phpmyadmin"}
+    - {role: nextcloud, tags: "nextcloud"}
