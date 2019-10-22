@@ -40,8 +40,8 @@
   hosts: nextcloud
   become: yes
   become_method: sudo
-  include_vars:
-    
+  vars:
+    nextcloud: https://download.nextcloud.com/server/releases/nextcloud-17.0.0.zip
 
   roles:
     - {role: common, tags: "common"}
