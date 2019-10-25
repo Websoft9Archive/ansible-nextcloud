@@ -26,7 +26,7 @@ Yes
 
 #### How can Nextcloud view&edit file online?
 
-You should complete the [OnlyOffice setting](admin-onlyds) on your Nextcloud
+You should complete the [OnlyOffice setting](/solution-more.md#nextcloud-preview-and-edit) on your Nextcloud
 
 #### What the difference between the Nextcloud(LAMP) and Nextcloud(LEMP) ?
 

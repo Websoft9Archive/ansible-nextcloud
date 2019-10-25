@@ -6,8 +6,6 @@ We collect the most common troubleshooting of using Nextcloud for your reference
 
 #### Nextcloud Redirects Error
 
-When add new language for Nextcloud, it will add redirects rules in the  `.htaccess` file of Nextcloud root directory.
-
 Check your `.htaccess` file in your application root directory, make sure there not any cycle redirects settings
 
 #### Database service could not be started?
