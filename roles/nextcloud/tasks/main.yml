@@ -1,0 +1,91 @@
+---
+# NextCloud
+
+- name: Get WebServer
+  shell: nginx -v
+  register: nginx_ver
+  ignore_errors: yes
+
+
+# System upgrade
+
+- name: System upgrade
+  yum:
+    name: '*'
+    state: latest
+
+## Install NextCloud
+- name: Download NextCloud
+  unarchive:
+    src: "{{ nextcloud }}"
+    dest: /data/wwwroot
+    owner: apache
+    group: apache
+    remote_src: yes
+
+- name: Copy Apache Config
+  template: src=vhost.conf dest=/etc/httpd/vhost
+
+- name: restart Apache
+  service: name=httpd state=restarted enabled=yes
+
+- name: Enable 9panel I
+  lineinfile:
+    path: /data/apps/9panel/js/websoft9.js
+    regexp: 'var set_apps=\["Example"\];'
+    line: 'var set_apps=["NextCloud"];'
+
+- name: Permission directory
+  shell: find /data/wwwroot -type d -exec chmod 750 {} \;
+  
+- name: Permission file
+  shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
+
+- name: Permission occ
+  file:
+    path: /data/wwwroot/nextcloud/occ
+    state: file
+    mode: "u+x,g+x"
+
+- name: copy config
+  copy:
+    src: config.php
+    dest: /data/wwwroot/nextcloud/config
+
+- name: restart Redis
+  service: name=redis state=restarted enabled=yes
+
+- name: Set NextCloud Job
+  command: php -f /data/wwwroot/nextcloud/cron.php
+
+- name: NextCloud cron
+  cron:
+    name: "NextCloud cron"
+    minute: "*/15"
+    hour: "*"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    user: apache
+    job: "php -f /data/wwwroot/nextcloud/cron.php"
+
+-  name: Set OPcache for NextCloud
+   copy: src=10-opcache.ini dest=/etc/php.d/
+ 
+- name: restart Apache
+  service: name=httpd state=restarted enabled=yes
+
+- name: Databases Random Password
+  copy: 
+    src: init.sh
+    dest: /root/
+    mode: 0750
+
+- name: Setting Startup
+  lineinfile:
+    path: /etc/rc.d/rc.local
+    regexp: '/root/init.sh'
+    line: '/root/init.sh'
+    mode: 0750
+
+

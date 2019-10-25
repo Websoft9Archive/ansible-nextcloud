@@ -1,0 +1,94 @@
+
+- name: Import MySQL Repo
+  template:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+  with_items:
+    - {src: mysql-community.repo.jinja2,dest: /etc/yum.repos.d/mysql-community.repo}
+    - {src: RPM-GPG-KEY-mysql,dest: /etc/pki/rpm-gpg/}
+
+- name: Install MySQL{{ mysqlver }}
+  yum: 
+    name: [mysql-community-server,MySQL-python]
+
+- name: Create Databases Directory
+  file:
+    path: /data/mysql
+    state: directory
+    owner: mysql
+    group: mysql
+  
+- name: Copy MySQL{{mysqlver}} Configuration
+  template: src=my.cnf.jinja2 dest=/etc/my.cnf
+
+- name: Restart MySQL{{mysqlver}}
+  service:
+    name: mysqld
+    state: restarted
+    enabled: yes
+
+- block:
+  - name: Get temporary MySQL57+ root password
+    shell: grep 'A temporary password is generated for root@localhost:' /var/log/messages | awk '{print $NF}'| tail -n1
+    register: mysql_root_temp_password
+    
+  - name: Disable  validate password plugin
+    lineinfile:
+      dest: /etc/my.cnf
+      regexp: '#validate_password=OFF' 
+      line: 'validate_password=OFF'
+
+  - name: Restart MySQL{{mysqlver}} Service
+    service: name=mysqld state=restarted enabled=yes
+
+  - name: Change MySQL57+ root user password 
+    shell: mysqladmin -u root --password="{{ mysql_root_temp_password.stdout }}" password "{{mysql_password}}"
+
+  when: (mysqlver == 5.7) or (mysqlver == '5.7') or (mysqlver == 8.0) or (mysqlver == '8.0')
+
+- name: Change MySQL{{ mysqlver }} root user password 
+  mysql_user: 
+    name: root 
+    host: "{{ item }}" 
+    password: "{{mysql_password}}"
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+  when: (mysqlver == 5.5) or (mysqlver == '5.5') or (mysqlver == 5.6) or (mysqlver == '5.6')
+
+
+- name: Removes all anyelse user accounts
+  mysql_user:
+    login_user: root
+    login_password: "{{mysql_password}}"
+    name: ''
+    host_all: yes
+    state: absent
+
+- name: Remove hostname user accounts
+  mysql_user: login_user=root login_password={{mysql_password}} name='root' host={{ ansible_nodename }} state=absent
+
+
+- name: Removes test Databases
+  mysql_db:
+    login_user: root
+    login_password: "{{mysql_password}}"
+    name: test
+    state: absent
+
+- name: Removing privileges on test database
+  command: mysql -uroot -p{{mysql_password}} -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
+
+- name: FLUSH PRIVILEGES
+  command: mysql -uroot -p{{mysql_password}} -e "FLUSH PRIVILEGES"
+
+
+- name: Create a MySQL  symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: '/etc/my.cnf',dest: /data/config/my.cnf}  
+    - {src: '/var/log/mysqld.log',dest: '/data/logs/mysqld.log'}

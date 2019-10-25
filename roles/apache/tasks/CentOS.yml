@@ -1,0 +1,66 @@
+- name: install the IUS rpm from a remote repo
+  yum:
+    name: https://rhel7.iuscommunity.org/ius-release.rpm
+    state: present
+
+- name: Install Apache
+  yum:
+    name: [httpd24u,httpd24u-mod_ssl]
+
+- name: Install Certbot
+  yum:
+    name: [certbot,certbot-apache]
+  ignore_errors: yes
+
+- pip:
+    name: [requests==2.6.0,urllib3]
+    extra_args: --upgrade --force-reinstall
+
+
+- name: Configure Apache
+  copy:
+    src: httpd.conf
+    dest: /etc/httpd/conf/
+
+- name: Create default Directory
+  file:
+    path: /data/config/apache
+    state: directory
+
+- name: Create Vhost Configure Directory
+  file:
+    path: /etc/httpd/vhost
+    state: directory
+
+- name: Create a Apache Log symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: /var/log/httpd,dest: /data/logs/apache}  # Apache 日志软连接
+    - {src: /etc/httpd/vhost,dest: /data/config/apache/vhost} # Apache 虚拟主机配置软连接
+    - {src: /etc/httpd/conf.modules.d,dest: /data/config/apache/conf.modules.d} # Apache 模块配置软连接
+
+- name: Change Directory Owner
+  file:
+    path: /data/{{item}}
+    state: directory
+    owner: apache
+    group: apache
+  with_items:
+    - wwwroot
+    - cert 
+
+
+- name: Start Apache
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+
+
+- name: Check Apache Version
+  shell: httpd -v
+  register: apache_ver
+  notify: Apache-centos Version

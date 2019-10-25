@@ -1,0 +1,10 @@
+- import_tasks: CentOS.yml
+  when: ansible_distribution == 'CentOS'
+
+- import_tasks: Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Check PHP Version
+  shell: php -v
+  register: php_ver
+  notify: PHP Version
