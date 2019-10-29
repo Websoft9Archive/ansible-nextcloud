@@ -52,7 +52,7 @@ The general manual backup operation steps are as follows:
 1. Compress and download the entire */data/wwwroot/nextcloud* directory by SFTP 
 2. Compress and download the entire */data/wwwroot/nextcloud/data* directory by SFTP 
 3. Export Nextcloud's database by [phpMyAdmin](/admin-mysql.md)
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-export-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/phpmyadmin/phpmyadmin-export-websoft9.png)
 4. Put the source code file, data file and database file in the same folder, named according to the date
 5. Backup completed
 

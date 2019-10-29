@@ -65,8 +65,8 @@ Redis logs file: */var/log/redis/redis.log*
 
 | 名称 | 端口号 | 用途 |  必要性 |
 | --- | --- | --- | --- |
-| HTTP | 80 | 通过 HTTP 访问 Odoo | 必须 |
-| HTTPS | 443 | 通过 HTTPS 访问 Odoo | 可选 |
+| HTTP | 80 | 通过 HTTP 访问 Nextcloud | 必须 |
+| HTTPS | 443 | 通过 HTTPS 访问 Nextcloud | 可选 |
 | MySQL | 3306 | 远程连接 MySQL | 可选 |
 | OnlyOffice Document Server on Docker | 8080 | 调用文档编辑与预览服务 | 可选 |
 
