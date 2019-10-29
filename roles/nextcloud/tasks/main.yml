@@ -10,6 +10,27 @@
     name: '*'
     state: latest
 
+# 数据库
+- name: Get MySQL Password
+  shell: cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}'
+  register: mysql_password
+
+- name: Create Drupal databases
+  mysql_db:
+    login_user: root
+    login_password: "{{mysql_password.stdout}}"
+    name: nextcloud
+    state: present
+
+- name: Create Drupal databases user
+  mysql_user:
+    login_user: root
+    login_password: "{{mysql_password.stdout}}"
+    name: nextcloud
+    password: "{{mysql_password.stdout}}"
+    priv: 'nextcloud.*:ALL'
+    state: present
+
 # NextCloud
 - name: Delete www.exampla.com directory
   file:
@@ -72,6 +93,9 @@
     line: 'var set_apps=["NextCloud"];'
 
 # 权限
+- name: change owner&group 
+  shell: chown -R apache:apache /data/wwwroot
+
 - name: Permission directory
   shell: find /data/wwwroot -type d -exec chmod 750 {} \;
   

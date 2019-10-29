@@ -1,0 +1,20 @@
+- name: Copy Default Vhost config
+  copy: 
+    src: centos-apache-vhost.conf
+    dest: /etc/apache2/sites-enabled/000-default.conf
+
+- name: Create default website Dir
+  file: 
+    path: /data/wwwroot/www.example.com
+    state: directory
+    owner: apache
+    group: apache
+
+
+- name: Restart Apache
+  service:
+    name: httpd
+    state: restarted
+
+- name: TEST phpinfo
+  shell: echo "<?php phpinfo(); ?>" > /data/wwwroot/www.example.com/index.php

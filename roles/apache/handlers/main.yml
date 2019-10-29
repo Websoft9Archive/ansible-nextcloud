@@ -1,7 +1,8 @@
 - name: Apache-centos Version
   debug:
-    var: apache_ver.stdout
+    var: centos_apache_ver.stdout
 
 - name: Apache-ubuntu Version
   debug:
-    var: apache_ver.stdout
+    var: ubuntu_apache_ver.stdout
+  when: ansible_distribution == 'Ubuntu'

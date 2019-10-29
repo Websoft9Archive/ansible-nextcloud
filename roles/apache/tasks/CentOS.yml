@@ -62,5 +62,5 @@
 
 - name: Check Apache Version
   shell: httpd -v
-  register: apache_ver
+  register: centos_apache_ver
   notify: Apache-centos Version

@@ -1,0 +1,91 @@
+---
+- block:
+  - name: Check whether the local machine contains MySQL
+    shell: curl -Is 127.0.0.1:3306 > /dev/null;echo $?
+    register: check_mysqlserver
+  
+  - name: Create apps directory
+    file: 
+        path: /data/apps
+        state: directory
+        owner: apache
+        group: apache
+        mode: 0755
+
+  - name: Dowload phpMyAdmin
+    unarchive:
+      src: https://files.phpmyadmin.net/phpMyAdmin/4.0.10.20/phpMyAdmin-4.0.10.20-all-languages.zip
+      dest: /data/apps
+      remote_src: yes
+    when: phpver == 54
+
+  - name: Dowload phpMyAdmin
+    unarchive:
+      src: https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-all-languages.zip
+      dest: /data/apps
+      remote_src: yes
+    when: phpver != 54
+
+  - name: phpMyadmin directory rename
+    shell: mv /data/apps/phpMyAdmin-* /data/apps/phpmyadmin
+  
+
+  - name: phpMyadmin Configuration
+    copy: 
+      src: config.inc.php
+      dest: /data/apps/phpmyadmin/
+  
+  - block:
+    - name: get root's password of mysql
+      shell: cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}'
+      register: mysql_password
+
+    - name: Active phpMyAdmin 4.0.x Advanced Features
+      mysql_db:
+        config_file: /etc/my.cnf
+        login_user: root
+        login_password: "{{mysql_password.stdout}}"
+        name: phpmyadmin
+        state: import
+        target: /data/apps/phpmyadmin/examples/create_tables.sql
+      when: phpver == 54
+
+    - name: Active phpMyAdmin 4.x Advanced Features
+      mysql_db:
+        config_file: /etc/my.cnf
+        login_user: root
+        login_password: "{{mysql_password.stdout}}"
+        name: phpmyadmin
+        state: import
+        target: /data/apps/phpmyadmin/sql/create_tables.sql
+      when: phpver != 54
+    when: check_mysqlserver.stdout == '0'
+
+
+   
+  - name: allow login to any user entered server in cookie based authentication 
+    lineinfile:
+      dest: /data/apps/phpmyadmin/libraries/config.default.php
+      regexp: "$cfg['AllowArbitraryServer'] = false;"
+      line: "$cfg['AllowArbitraryServer'] = true;"
+      state: present
+    when: check_mysqlserver.stdout > '0'
+
+  - name: change phpMyadmin permission
+    file: 
+      path: /data/apps/phpmyadmin
+      group: apache
+      owner: apache
+      recurse: yes
+      state: directory
+
+  - name: Copy phpMyAdmin Configuration
+    copy: src=phpMyAdmin.conf dest=/etc/httpd/conf.d/
+
+  - name: apache service restart
+    service: name=httpd state=restarted
+
+  when: ansible_distribution == 'CentOS'
+
+- debug: msg="Not Support Ubuntu"
+  when: ansible_distribution == 'Ubuntu'

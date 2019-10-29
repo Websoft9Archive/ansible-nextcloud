@@ -1,0 +1,43 @@
+- name: Configure PHP-FPM
+  template:
+    src: cnetos-php-fpm.jinja2
+    dest: /etc/php-fpm.d/www.conf
+
+- name: Restart PHP-FPM
+  service:
+    name: php-fpm
+    state: restarted
+    enabled: yes
+
+- name: Support PHP for Apache
+  copy:
+    src: apache-php.conf
+    dest: /etc/httpd/conf.d/php.conf
+
+- name: Set DirectoryIndex 
+  lineinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    regexp: '    DirectoryIndex index.html'
+    line: "    DirectoryIndex index.html index.php"
+    state: present
+
+- name: Copy Default Vhost config
+  copy: 
+    src: centos-apache-vhost.conf
+    dest: /etc/httpd/vhost/vhost.conf
+
+- name: Create default website Dir
+  file: 
+    path: /data/wwwroot/www.example.com
+    state: directory
+    owner: apache
+    group: apache
+
+
+- name: Restart Apache
+  service:
+    name: httpd
+    state: restarted
+
+
+

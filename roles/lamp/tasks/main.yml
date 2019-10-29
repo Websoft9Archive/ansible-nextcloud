@@ -1,0 +1,9 @@
+# - name: Check HTTP Server type
+#   shell: "curl -Is http://127.0.0.1 | grep 'Server' |awk -F ': ' '{print $2}'|tr 'A-Z' 'a-z'"
+#   register: http_type
+
+- import_tasks: CentOS.yml
+  when: ansible_distribution == 'CentOS'
+
+# - import_tasks: Ubuntu.yml
+#   when: ansible_distribution == 'Ubuntu'
