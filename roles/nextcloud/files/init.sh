@@ -1,14 +1,28 @@
 #!/bin/bash
 
-old_password=$(cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}' )
-new_password=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c10)
+old_password=$(cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}')
 
-systemctl restart mysqld
-mysqladmin -uroot -p${old_password} -h 127.0.0.1 password $new_password
-mysqladmin -uroot -p${old_password} -h localhost password $new_password
-echo -e 'MySQL username:root\nMySQL Password:'$new_password  > /credentials/password.txt
+new_root_password=$(pwgen -Acns 8 1)
+new_nextcloud_password=$(pwgen -Acns 8 1)
 
-                                                                                         
-sed -i "s/\/root\/init.sh//" /etc/rc.local                                                      
+systemctl restart mysql
+
+root_hosts=$(echo $(mysql -uroot -p${old_password} -e "select host from mysql.user where user='root';") | sed 's/^host//')
+nextcloud_hosts=$(echo $(mysql -unextcloud -p${old_password} -e "select host from mysql.user where user='nextcloud';") | sed 's/^host//')
+
+for i in $root_hosts
+do
+  mysqladmin -uroot -p${old_password} -h $i password $new_root_password
+done
+
+for j in $nextcloud_hosts
+do
+  mysqladmin -unextcloud -p${old_password} -h $j password $new_nextcloud_password
+done
+
+echo -e 'MySQL username:root\nMySQL Password:'$new_root_password  > /credentials/password.txt
+echo -e '\nMySQL username:nextcloud\nMySQL Password:'$new_nextcloud_password  >> /credentials/password.txt
+
+sed -i 's/\/root\/init.sh//g' /etc/rc.local
+
 rm -rf /root/init.sh
-

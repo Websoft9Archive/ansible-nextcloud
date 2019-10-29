@@ -48,5 +48,7 @@
     - {role: apache, tags: "apache"}
     - {role: mysql, tags: "mysql"}
     - {role: php-fpm, tags: "php-fpm"}
+    - {role: lamp, tags: "lamp"}
     - {role: phpmyadmin, tags: "phpmyadmin"}
+    - {role: 9panel, tags: "9panel"}
     - {role: nextcloud, tags: "nextcloud"}

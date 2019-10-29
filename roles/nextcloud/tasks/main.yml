@@ -1,45 +1,40 @@
 ---
-# NextCloud
-
 - name: Get WebServer
   shell: nginx -v
   register: nginx_ver
   ignore_errors: yes
 
-
-# System upgrade
-
+# 系统更新
 - name: System upgrade
   yum:
     name: '*'
     state: latest
 
-## Install NextCloud
-- name: Download NextCloud
-  unarchive:
-    src: "{{ nextcloud }}"
-    dest: /data/wwwroot
+# NextCloud
+- name: Delete www.exampla.com directory
+  file:
+    path: /data/wwwroot/www.example.com
+    state: absent
+
+- name: Create Directory
+  file:
+    path: /data/wwwroot/nextcloud
+    state: directory
     owner: apache
     group: apache
-    remote_src: yes
+    mode: 0755
+
+- name: Download NextCloud
+  git:
+    repo: https://github.com/nextcloud/server.git
+    dest: /data/wwwroot/nextcloud
+    version: backport/17626/stable17
 
 - name: Copy Apache Config
   template: src=vhost.conf dest=/etc/httpd/vhost
 
 - name: restart Apache
   service: name=httpd state=restarted enabled=yes
-
-- name: Enable 9panel I
-  lineinfile:
-    path: /data/apps/9panel/js/websoft9.js
-    regexp: 'var set_apps=\["Example"\];'
-    line: 'var set_apps=["NextCloud"];'
-
-- name: Permission directory
-  shell: find /data/wwwroot -type d -exec chmod 750 {} \;
-  
-- name: Permission file
-  shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
 
 - name: Permission occ
   file:
@@ -51,9 +46,6 @@
   copy:
     src: config.php
     dest: /data/wwwroot/nextcloud/config
-
-- name: restart Redis
-  service: name=redis state=restarted enabled=yes
 
 - name: Set NextCloud Job
   command: php -f /data/wwwroot/nextcloud/cron.php
@@ -71,10 +63,28 @@
 
 -  name: Set OPcache for NextCloud
    copy: src=10-opcache.ini dest=/etc/php.d/
- 
+
+# 9panel
+- name: Enable 9panel I
+  lineinfile:
+    path: /data/apps/9panel/js/websoft9.js
+    regexp: 'var set_apps=\["Example"\];'
+    line: 'var set_apps=["NextCloud"];'
+
+# 权限
+- name: Permission directory
+  shell: find /data/wwwroot -type d -exec chmod 750 {} \;
+  
+- name: Permission file
+  shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
+
 - name: restart Apache
   service: name=httpd state=restarted enabled=yes
 
+- name: restart Redis
+  service: name=redis state=restarted enabled=yes
+
+# 随机密码
 - name: Databases Random Password
   copy: 
     src: init.sh
