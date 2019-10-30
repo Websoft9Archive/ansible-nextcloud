@@ -45,6 +45,7 @@
 
   roles:
     # - {role: common, tags: "common"}
+    - {role: redis, tags: "redis"}
     # - {role: apache, tags: "apache"}
     # - {role: mysql, tags: "mysql"}
     # - {role: php-fpm, tags: "php-fpm"}

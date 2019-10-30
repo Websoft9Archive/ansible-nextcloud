@@ -1,5 +1,9 @@
 ---
 - block:
+  - name: Check HTTP Server type
+    shell: "curl -Is http://127.0.0.1 | grep 'Server' |awk -F ': ' '{print $2}'|tr 'A-Z' 'a-z'"
+    register: http_type
+    
   - name: Check whether the local machine contains MySQL
     shell: curl -Is 127.0.0.1:3306 > /dev/null;echo $?
     register: check_mysqlserver
@@ -8,8 +12,8 @@
     file: 
         path: /data/apps
         state: directory
-        owner: apache
-        group: apache
+        owner: "{{http_type.stdout}}"
+        group: "{{http_type.stdout}}"
         mode: 0755
 
   - name: Dowload phpMyAdmin
@@ -74,16 +78,29 @@
   - name: change phpMyadmin permission
     file: 
       path: /data/apps/phpmyadmin
-      group: apache
-      owner: apache
+      group: "{{http_type.stdout}}"
+      owner: "{{http_type.stdout}}"
       recurse: yes
       state: directory
+  
+  - block: # phpMyAdmin Apache
+    - name: Copy phpMyAdmin Configuration for apache
+      copy: src=phpMyAdmin-apache.conf dest=/etc/httpd/conf.d/phpMyAdmin.conf
+    
+    - name: apache service restart
+      service: name=httpd state=restarted
 
-  - name: Copy phpMyAdmin Configuration
-    copy: src=phpMyAdmin.conf dest=/etc/httpd/conf.d/
+    when: http_type.stdout == 'apache'
 
-  - name: apache service restart
-    service: name=httpd state=restarted
+
+  - block: # phpMyAdmin Nginx
+    - name: Copy phpMyAdmin Configuration for nginx
+      copy: src=phpMyAdmin-nginx.conf dest=/etc/nginx/extra/phpmyadmin.conf
+      
+    - name: apache service restart
+      service: name=nginx state=restarted
+
+    when: http_type.stdout == 'nginx'
 
   when: ansible_distribution == 'CentOS'
 

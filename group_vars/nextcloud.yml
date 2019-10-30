@@ -1,1 +1,3 @@
 cloud: azure
+mysqlver: 5.6 
+nextcloud_version: backport/17626/stable17

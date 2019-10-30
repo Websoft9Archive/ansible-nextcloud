@@ -25,7 +25,7 @@
 
   - name: Install Common Software
     yum: 
-      name: [mosh,yum-utils,wget,openssl,unzip,bzip2,expect,at,vim, screen,pwgen,git, htop, yum-cron,ImageMagick, goaccess,MySQL-python,python-pip]
+      name: [mosh,yum-utils,wget,openssl,unzip,bzip2,expect,at,vim, screen,pwgen,git, htop, yum-cron,ImageMagick, goaccess,MySQL-python,python-pip,inotify-tools]
       state: installed
     
   - name: Configuration yum-cron
@@ -103,7 +103,7 @@
 - name: Fix No space left on device
   sysctl:
     name: fs.inotify.max_user_watches
-    value: "262144"
+    value: "8192000"
 
 - block:
   - name: AWS Configure

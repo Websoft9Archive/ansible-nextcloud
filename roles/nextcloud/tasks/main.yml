@@ -1,109 +1,119 @@
-# ---
-# - name: Get WebServer
-#   shell: nginx -v
-#   register: nginx_ver
-#   ignore_errors: yes
+---
+- name: Get WebServer
+  shell: nginx -v
+  register: nginx_ver
+  ignore_errors: yes
 
-# # 系统更新
-# - name: System upgrade
-#   yum:
-#     name: '*'
-#     state: latest
+# 系统更新
+- name: System upgrade
+  yum:
+    name: '*'
+    state: latest
 
-# # 数据库
-# - name: Get MySQL Password
-#   shell: cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}'
-#   register: mysql_password
+# 数据库
+- name: copy my.cnf
+  template:
+    src: my.cnf.jinja2
+    dest: /etc/my.cnf
 
-# - name: Create Drupal databases
-#   mysql_db:
-#     login_user: root
-#     login_password: "{{mysql_password.stdout}}"
-#     name: nextcloud
-#     state: present
+- name: restart mysql
+  service:
+    name: mysqld
+    state: restarted
 
-# - name: Create Drupal databases user
-#   mysql_user:
-#     login_user: root
-#     login_password: "{{mysql_password.stdout}}"
-#     name: nextcloud
-#     password: "{{mysql_password.stdout}}"
-#     priv: 'nextcloud.*:ALL'
-#     state: present
+- name: Get MySQL Password
+  shell: cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}'
+  register: mysql_password
 
-# # NextCloud
-# - name: Delete www.exampla.com directory
-#   file:
-#     path: /data/wwwroot/www.example.com
-#     state: absent
+- name: Create nextcloud databases
+  mysql_db:
+    login_user: root
+    login_password: "{{mysql_password.stdout}}"
+    name: nextcloud
+    state: present
 
-# - name: Create Directory
-#   file:
-#     path: /data/wwwroot/nextcloud
-#     state: directory
-#     owner: apache
-#     group: apache
-#     mode: 0755
+- name: Create nextcloud databases user
+  mysql_user:
+    login_user: root
+    login_password: "{{mysql_password.stdout}}"
+    name: nextcloud
+    password: "{{mysql_password.stdout}}"
+    priv: 'nextcloud.*:ALL'
+    state: present
 
-# - name: Download NextCloud
-#   git:
-#     repo: https://github.com/nextcloud/server.git
-#     dest: /data/wwwroot/nextcloud
-#     version: backport/17626/stable17
+# NextCloud
+- name: Delete www.exampla.com directory
+  file:
+    path: /data/wwwroot/www.example.com
+    state: absent
 
-# - name: Copy Apache Config
-#   template: src=vhost.conf dest=/etc/httpd/vhost
+- name: Create Directory
+  file:
+    path: /data/wwwroot/nextcloud
+    state: directory
+    owner: apache
+    group: apache
+    mode: 0755
 
-# - name: restart Apache
-#   service: name=httpd state=restarted enabled=yes
+- name: Download NextCloud
+  git:
+    repo: https://github.com/nextcloud/server.git
+    dest: /data/wwwroot/nextcloud
+    version: '{{nextcloud_version}}'
 
-# - name: Permission occ
-#   file:
-#     path: /data/wwwroot/nextcloud/occ
-#     state: file
-#     mode: "u+x,g+x"
+- name: Copy Apache Config
+  template: src=vhost.conf dest=/etc/httpd/vhost
 
-# - name: copy config
-#   copy:
-#     src: config.php
-#     dest: /data/wwwroot/nextcloud/config
+- name: restart Apache
+  service: name=httpd state=restarted enabled=yes
 
-# - name: Set NextCloud Job
-#   command: php -f /data/wwwroot/nextcloud/cron.php
+- name: Permission occ
+  file:
+    path: /data/wwwroot/nextcloud/occ
+    state: file
+    mode: "u+x,g+x"
 
-# - name: NextCloud cron
-#   cron:
-#     name: "NextCloud cron"
-#     minute: "*/15"
-#     hour: "*"
-#     day: "*"
-#     month: "*"
-#     weekday: "*"
-#     user: apache
-#     job: "php -f /data/wwwroot/nextcloud/cron.php"
+- name: copy config
+  copy:
+    src: config.php
+    dest: /data/wwwroot/nextcloud/config
 
-# -  name: Set OPcache for NextCloud
-#    copy: src=10-opcache.ini dest=/etc/php.d/
+- name: Set NextCloud Job
+  command: php -f /data/wwwroot/nextcloud/cron.php
 
-# # 9panel
-# - name: Enable 9panel I
-#   lineinfile:
-#     path: /data/apps/9panel/js/websoft9.js
-#     regexp: 'var set_apps=\["Example"\];'
-#     line: 'var set_apps=["NextCloud"];'
+- name: NextCloud cron
+  cron:
+    name: "NextCloud cron"
+    minute: "*/15"
+    hour: "*"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    user: apache
+    job: "php -f /data/wwwroot/nextcloud/cron.php"
 
-# # 权限
-# - name: change owner&group 
-#   shell: chown -R apache:apache /data/wwwroot
+-  name: Set OPcache for NextCloud
+   copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
-# - name: Permission directory
-#   shell: find /data/wwwroot -type d -exec chmod 750 {} \;
+# 9panel
+- name: Enable 9panel I
+  lineinfile:
+    path: /data/apps/9panel/js/websoft9.js
+    regexp: 'var set_apps=\["Example"\];'
+    line: 'var set_apps=["NextCloud"];'
+
+# 权限
+- name: change owner&group 
+  shell: chown -R apache:apache /data/wwwroot
+
+- name: Permission directory
+  shell: find /data/wwwroot -type d -exec chmod 750 {} \;
   
-# - name: Permission file
-#   shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
+- name: Permission file
+  shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
 
-# - name: restart Apache
-#   service: name=httpd state=restarted enabled=yes
+- name: restart Apache
+  service: name=httpd state=restarted enabled=yes
 
 # 随机密码
 - name: Databases Random Password
