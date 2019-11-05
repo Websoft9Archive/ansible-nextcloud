@@ -59,13 +59,18 @@
   git:
     repo: https://github.com/nextcloud/server.git
     dest: /data/wwwroot/nextcloud
-    version: '{{nextcloud_version}}'
+    version: "{{nextcloud_version}}"
+
+-  name: Set OPcache for NextCloud
+   copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
 - name: Copy Apache Config
   template: src=vhost.conf dest=/etc/httpd/vhost
 
-- name: restart Apache
-  service: name=httpd state=restarted enabled=yes
+- name: restart Apache php-fpm
+  service: 
+    name: [httpd, php-fpm] 
+    state: restarted
 
 - name: Permission occ
   file:
@@ -91,9 +96,6 @@
     weekday: "*"
     user: apache
     job: "php -f /data/wwwroot/nextcloud/cron.php"
-
--  name: Set OPcache for NextCloud
-   copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
 # 9panel
 - name: Enable 9panel I

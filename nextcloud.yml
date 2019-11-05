@@ -1,29 +1,29 @@
-# - name: nextcloud
-#   hosts: local
-#   connection: local
-#   gather_facts: False
-#   pre_tasks:
-#     - name: Set Git repo
-#       shell: |
-#         git init
-#         git config core.sparsecheckout true
-#         git remote add origin https://github.com/Websoft9/ansible-roles.git
-#         echo {{ item }} >> .git/info/sparse-checkout
-#       args:
-#         chdir: roles
-#       with_items:
-#         - "{{ public_roles }}"
+- name: nextcloud
+  hosts: local
+  connection: local
+  gather_facts: False
+  pre_tasks:
+    - name: Set Git repo
+      shell: |
+        git init
+        git config core.sparsecheckout true
+        git remote add origin https://github.com/Websoft9/ansible-roles.git
+        echo {{ item }} >> .git/info/sparse-checkout
+      args:
+        chdir: roles
+      with_items:
+        - "{{ public_roles }}"
 
-#     - name: Get Public Roles
-#       git:
-#         repo: https://github.com/Websoft9/ansible-roles.git
-#         dest: roles
-#         clone: no
+    - name: Get Public Roles
+      git:
+        repo: https://github.com/Websoft9/ansible-roles.git
+        dest: roles
+        clone: no
 
-#     - name: Delete .git
-#       file:
-#         path: roles/.git
-#         state: absent
+    - name: Delete .git
+      file:
+        path: roles/.git
+        state: absent
 
 # # 服务器前置任务（ubuntu使用）
 # - name: nextcloud
@@ -45,7 +45,7 @@
 
   roles:
     # - {role: common, tags: "common"}
-    - {role: redis, tags: "redis"}
+    # - {role: redis, tags: "redis"}
     # - {role: apache, tags: "apache"}
     # - {role: mysql, tags: "mysql"}
     # - {role: php-fpm, tags: "php-fpm"}

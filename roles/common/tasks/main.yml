@@ -1,4 +1,5 @@
 ---
+# - debug: msg="Hello World"
 
 # Centos 更新 安装基础软件工具等操作
 - block:
@@ -20,8 +21,9 @@
     selinux:
       state: disabled
 
-  - name:  temporarily disable Selinux
-    shell: setenforce 0 
+  # - name:  temporarily disable Selinux
+  #   shell: setenforce 0 
+  #   ignore_errors: yes
 
   - name: Install Common Software
     yum: 
