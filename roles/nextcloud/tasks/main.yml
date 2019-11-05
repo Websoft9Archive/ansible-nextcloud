@@ -64,12 +64,17 @@
 -  name: Set OPcache for NextCloud
    copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
+- name: restart php-fpm
+  service:
+    name: php-fpm
+    state: restarted
+
 - name: Copy Apache Config
   template: src=vhost.conf dest=/etc/httpd/vhost
 
 - name: restart Apache php-fpm
   service: 
-    name: [httpd, php-fpm] 
+    name: httpd
     state: restarted
 
 - name: Permission occ
