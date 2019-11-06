@@ -136,4 +136,9 @@
     line: '/root/init.sh'
     mode: 0750
 
+# azure 初始化 vm
+- name: intialization vm
+  shell: waagent -deprovision+user --force
+  when: cloud == "azure"
+
 
