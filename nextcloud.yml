@@ -23,7 +23,7 @@
   roles:
     - {role: role_common, tags: "role_common"}
     - {role: role_cloud, tags: "role_cloud"}
-    - {role: role_redis, tags: "role_redis"}
+    #- {role: role_redis, tags: "role_redis"}
     - {role: role_apache, when: nextcloud_webs == 'apache', tags: "role_apache"}
     - {role: role_nginx, when: nextcloud_webs == 'nginx', tags: "role_nginx"}
     - {role: role_mysql, tags: "role_mysql"}
