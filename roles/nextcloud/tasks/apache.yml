@@ -1,0 +1,102 @@
+---
+# NextCloud
+- name: Delete www.example.com directory
+  file:
+    path: /data/wwwroot/www.example.com
+    state: absent
+
+- name: Create Directory
+  file:
+    path: /data/wwwroot/nextcloud
+    state: directory
+    owner: apache
+    group: apache
+    mode: 0755
+
+- name: Download NextCloud
+  git:
+    repo: https://github.com/nextcloud/server.git
+    dest: /data/wwwroot/nextcloud
+    version: "{{nextcloud_version}}"
+
+-  name: Set OPcache for NextCloud
+   copy: src=opcache.ini dest=/etc/php.d/opcache.ini
+
+- name: restart php-fpm
+  service:
+    name: php-fpm
+    state: restarted
+
+- name: Copy Apache Config
+  template: src=vhost.conf dest=/etc/httpd/vhost
+
+- name: restart Apache
+  service: 
+    name: httpd
+    state: restarted
+
+- name: Permission occ
+  file:
+    path: /data/wwwroot/nextcloud/occ
+    state: file
+    mode: "u+x,g+x"
+
+- name: copy config
+  copy:
+    src: config.php
+    dest: /data/wwwroot/nextcloud/config
+
+- name: Set NextCloud Job
+  command: php -f /data/wwwroot/nextcloud/cron.php
+
+- name: NextCloud cron
+  cron:
+    name: "NextCloud cron"
+    minute: "*/15"
+    hour: "*"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    user: apache
+    job: "php -f /data/wwwroot/nextcloud/cron.php"
+
+# 9panel
+- name: Enable 9panel I
+  lineinfile:
+    path: /data/apps/9panel/js/websoft9.js
+    regexp: 'var set_apps=\["Example"\];'
+    line: 'var set_apps=["NextCloud"];'
+
+# 权限
+- name: change owner&group 
+  shell: chown -R apache:apache /data/wwwroot
+
+- name: Permission directory
+  shell: find /data/wwwroot -type d -exec chmod 750 {} \;
+  
+- name: Permission file
+  shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
+
+- name: restart Apache
+  service: name=httpd state=restarted enabled=yes
+
+# 随机密码
+- name: Databases Random Password
+  copy: 
+    src: init.sh
+    dest: /root/
+    mode: 0750
+
+- name: Setting Startup
+  lineinfile:
+    path: /etc/rc.d/rc.local
+    regexp: '/root/init.sh'
+    line: '/root/init.sh'
+    mode: 0750
+
+# azure 初始化 vm
+- name: intialization vm
+  shell: waagent -deprovision+user --force
+  when: cloud == "azure"
+
+

@@ -1,48 +1,13 @@
 ---
-- name: Get WebServer
-  shell: nginx -v
-  register: nginx_ver
-  ignore_errors: yes
-
-# 系统更新
-- name: System upgrade
-  yum:
-    name: '*'
-    state: latest
-
-# 数据库
-- name: copy my.cnf
-  template:
-    src: my.cnf.jinja2
-    dest: /etc/my.cnf
-
-- name: restart mysql
-  service:
-    name: mysqld
-    state: restarted
-
-- name: Get MySQL Password
-  shell: cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}'
-  register: mysql_password
-
-- name: Create nextcloud databases
-  mysql_db:
-    login_user: root
-    login_password: "{{mysql_password.stdout}}"
-    name: nextcloud
-    state: present
-
-- name: Create nextcloud databases user
-  mysql_user:
-    login_user: root
-    login_password: "{{mysql_password.stdout}}"
-    name: nextcloud
-    password: "{{mysql_password.stdout}}"
-    priv: 'nextcloud.*:ALL'
-    state: present
+# 9panel
+- name: Enable 9panel I
+  lineinfile:
+    path: /data/apps/9panel/js/websoft9.js
+    regexp: 'var set_apps=\["Example"\];'
+    line: 'var set_apps=["NextCloud"];'
 
 # NextCloud
-- name: Delete www.exampla.com directory
+- name: Delete www.example.com directory
   file:
     path: /data/wwwroot/www.example.com
     state: absent
@@ -51,8 +16,6 @@
   file:
     path: /data/wwwroot/nextcloud
     state: directory
-    owner: apache
-    group: apache
     mode: 0755
 
 - name: Download NextCloud
@@ -61,20 +24,12 @@
     dest: /data/wwwroot/nextcloud
     version: "{{nextcloud_version}}"
 
--  name: Set OPcache for NextCloud
+-  name: Set OPCache for NextCloud
    copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
 - name: restart php-fpm
   service:
     name: php-fpm
-    state: restarted
-
-- name: Copy Apache Config
-  template: src=vhost.conf dest=/etc/httpd/vhost
-
-- name: restart Apache php-fpm
-  service: 
-    name: httpd
     state: restarted
 
 - name: Permission occ
@@ -91,54 +46,66 @@
 - name: Set NextCloud Job
   command: php -f /data/wwwroot/nextcloud/cron.php
 
-- name: NextCloud cron
-  cron:
-    name: "NextCloud cron"
-    minute: "*/15"
-    hour: "*"
-    day: "*"
-    month: "*"
-    weekday: "*"
-    user: apache
-    job: "php -f /data/wwwroot/nextcloud/cron.php"
 
-# 9panel
-- name: Enable 9panel I
-  lineinfile:
-    path: /data/apps/9panel/js/websoft9.js
-    regexp: 'var set_apps=\["Example"\];'
-    line: 'var set_apps=["NextCloud"];'
-
-# 权限
-- name: change owner&group 
-  shell: chown -R apache:apache /data/wwwroot
-
+# 文件读写权限处理
 - name: Permission directory
   shell: find /data/wwwroot -type d -exec chmod 750 {} \;
   
 - name: Permission file
   shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
 
-- name: restart Apache
-  service: name=httpd state=restarted enabled=yes
 
-# 随机密码
-- name: Databases Random Password
-  copy: 
-    src: init.sh
-    dest: /root/
-    mode: 0750
+#--------分别处理Apache和Nginx------------ >>>开始
 
-- name: Setting Startup
-  lineinfile:
-    path: /etc/rc.d/rc.local
-    regexp: '/root/init.sh'
-    line: '/root/init.sh'
-    mode: 0750
+#Apache
 
-# azure 初始化 vm
-- name: intialization vm
-  shell: waagent -deprovision+user --force
-  when: cloud == "azure"
+- block:
+  - name: change owner&group for Apache
+    shell: chown -R apache:apache /data/wwwroot
+
+  - name: Copy Apache Config
+    template: src=vhost.conf dest=/etc/httpd/vhost
+
+  - name: NextCloud cron
+    cron:
+      name: "NextCloud cron"
+      minute: "*/15"
+      hour: "*"
+      day: "*"
+      month: "*"
+      weekday: "*"
+      user: apache
+      job: "php -f /data/wwwroot/nextcloud/cron.php"
+    
+  - name: restart Apache
+    service: name=httpd state=restarted enabled=yes
+
+when: nextcloud_webs == "apache"
 
 
+#Nginx
+
+- block:
+  - name: change owner&group for Nginx
+    shell: chown -R nginx:nginx /data/wwwroot
+
+  - name: Copy Nginx Config
+    template: src=vhost.conf dest=/etc/httpd/vhost
+
+  - name: NextCloud cron
+    cron:
+      name: "NextCloud cron"
+      minute: "*/15"
+      hour: "*"
+      day: "*"
+      month: "*"
+      weekday: "*"
+      user: nginx
+      job: "php -f /data/wwwroot/nextcloud/cron.php"
+  
+  - name: restart Nginx
+    service: name=nginx state=restarted enabled=yes
+
+when: {{nextcloud_webs}} == "nginx"
+
+#--------分别处理Apache和Nginx---------------<<结束
