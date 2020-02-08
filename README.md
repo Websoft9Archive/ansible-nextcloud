@@ -16,7 +16,7 @@
 | 私有云|  KVM, VMware, VirtualBox, OpenStack | 可选 |
 | 服务器配置 | 最低1核1G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |  
 
-更多配置要求参考官方文档：[《System Requirements》](https://docs.nextcloud.com/server/18/admin_manual/installation/system_requirements.html)
+更多配置要求参考官方文档：[《System Requirements》](https://docs.nextcloud.com/server/18/admin_manual/installation/source_installation.html)
 
 ## 组件
 
