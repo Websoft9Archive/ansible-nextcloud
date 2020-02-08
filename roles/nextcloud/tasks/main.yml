@@ -47,7 +47,8 @@
   command: php -f /data/wwwroot/nextcloud/cron.php
 
 
-# 文件读写权限处理
+# 系统通用
+
 - name: Permission directory
   shell: find /data/wwwroot -type d -exec chmod 750 {} \;
   
