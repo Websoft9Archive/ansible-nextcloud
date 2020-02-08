@@ -1,0 +1,24 @@
+- name: Check HTTP Server type
+  shell: "curl -Is http://127.0.0.1 | grep 'Server' |awk -F ': ' '{print $2}'|tr 'A-Z' 'a-z'"
+  register: http_type
+
+
+- name: Copy inotify watch
+  template: 
+    src: "{{item.src}}"
+    dest: '{{item.dest}}'
+  with_items:
+    - {src: inotify_watch.sh , dest: /usr/local/bin/inotify_watch}
+    - {src: inotify_watch.service , dest: /lib/systemd/system/inotify_watch.service}
+
+- name: inotify_watch execute permission
+  file:
+    path: /usr/local/bin/inotify_watch
+    mode: 750
+
+- name: Start inotify_watch
+  service:
+    name: inotify_watch.service
+    state: started
+    enabled: yes
+#######
