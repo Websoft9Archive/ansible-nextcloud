@@ -80,7 +80,7 @@
   - name: restart Apache
     service: name=httpd state=restarted enabled=yes
 
-when: {{nextcloud_webs}} == "apache"
+  when: nextcloud_webs == "apache"
 
 
 #Nginx
@@ -106,6 +106,6 @@ when: {{nextcloud_webs}} == "apache"
   - name: restart Nginx
     service: name=nginx state=restarted enabled=yes
 
- when: {{nextcloud_webs}} == "nginx"
+  when: nextcloud_webs == "nginx"
 
 #--------分别处理Apache和Nginx---------------<<结束
