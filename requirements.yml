@@ -1,0 +1,51 @@
+# 根据需求添加相对应的role
+- src: http://github.com/websoft9dev/role_common
+  version: master
+
+- src: http://github.com/websoft9dev/role_cloud
+  version: master
+
+- src: http://github.com/websoft9dev/role_apache
+  version: master
+
+- src: http://github.com/websoft9dev/role_nginx
+  version: master  
+
+- src: http://github.com/websoft9dev/role_mysql
+  version: master
+
+- src: http://github.com/websoft9dev/role_php-fpm
+  version: master
+
+- src: http://github.com/websoft9dev/role_phpmyadmin
+  version: master
+
+- src: http://github.com/websoft9dev/role_init_password
+  version: master
+
+- src: http://github.com/websoft9dev/role_end
+  version: master
+
+- src: http://github.com/websoft9dev/role_9panel
+  version: master
+
+- src: http://github.com/websoft9dev/role_lamp
+  version: master
+
+- src: http://github.com/websoft9dev/role_lnmp
+  version: master
+
+- src: http://github.com/websoft9dev/role_inotify_watch
+  version: master
+
+- src: http://github.com/websoft9dev/role_inotify_watch
+  version: master
+
+- src: http://github.com/websoft9dev/role_inotify_watch
+  version: master
+
+- src: http://github.com/websoft9dev/role_docker
+  version: master
+
+- src: http://github.com/websoft9dev/role_docker_onlyofficedocumentserver
+  version: master

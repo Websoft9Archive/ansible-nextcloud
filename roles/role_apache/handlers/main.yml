@@ -1,0 +1,7 @@
+- name: Apache-centos Version
+  debug:
+    var: centos_apache_ver.stdout
+
+- name: Apache-ubuntu Version
+  debug:
+    var: ubuntu_apache_ver.stdout

@@ -1,18 +1,26 @@
 ## 部署
-- name: nextcloud
-  hosts: nextcloud
+- name: Nextcloud
+  hosts: all
   become: yes
   become_method: sudo
-  vars:
-    nextcloud: https://download.nextcloud.com/server/releases/nextcloud-17.0.0.zip
+  vars_files:
+    - vars/main.yml
 
   roles:
-    - {role: common, tags: "common"}
-    - {role: redis, tags: "redis"}
-    - {role: apache, tags: "apache"}
-    - {role: mysql, tags: "mysql"}
-    - {role: php-fpm, tags: "php-fpm"}
-    - {role: lamp, tags: "lamp"}
-    - {role: phpmyadmin, tags: "phpmyadmin"}
-    - {role: 9panel, tags: "9panel"}
+    - {role: role_common, tags: "role_common"}
+    - {role: role_cloud, tags: "role_cloud"}
+    - {role: role_redis, tags: "role_redis"}
+    - {role: role_apache, when: nextcloud_webs == 'apache', tags: "role_apache"}
+    - {role: role_nginx, when: nextcloud_webs == 'nginx', tags: "role_nginx"}
+    - {role: role_mysql, tags: "role_mysql"}
+    - {role: role_php-fpm, tags: "role_php-fpm"}
+    - {role: role_inotify_watch, tags: "role_inotify_watch"}
+    - {role: role_lamp, when: nextcloud_webs == 'apache', tags: "role_lamp"}
+    - {role: role_lnmp, when: nextcloud_webs == 'nginx', tags: "role_lnmp"}
+    - {role: role_init_password, tags: "role_init_password"}
+    - {role: role_phpmyadmin, tags: "role_phpmyadmin"}
+    - {role: role_9panel, tags: "role_9panel"}
+    - {role: role_docker, tags: "role_docker"}
+    - {role: role_docker_onlyofficedocumentserver, tags: "role_docker_onlyofficedocumentserver"}
     - {role: nextcloud, tags: "nextcloud"}
+    - {role: role_end, tags: "end"}

@@ -1,0 +1,39 @@
+- name: Import PHP PPA
+  apt_repository:
+    repo: ppa:ondrej/php
+
+- name: Install PHP{{php_version}}
+  apt:
+    name: ['php{{php_version}}','php{{php_version}}-fpm','php{{php_version}}-apcu','php{{php_version}}-mcrypt','php{{php_version}}-cli','php{{php_version}}-bz2','php{{php_version}}-common','php{{php_version}}-curl','php{{php_version}}-gd','php{{php_version}}-geoip','php{{php_version}}-imagick','php{{php_version}}-imap','php{{php_version}}-intl','php{{php_version}}-json','php{{php_version}}-mbstring','php{{php_version}}-memcache','php{{php_version}}-mysql','php{{php_version}}-mongodb','php{{php_version}}-pgsql','php{{php_version}}-redis','php{{php_version}}-sqlite3','php{{php_version}}-tidy','php{{php_version}}-xml','php{{php_version}}-zip','php-pear']
+  when: php_version < "7.1"
+
+- name: Install PHP{{php_version}}
+  apt:
+    name: ['php{{php_version}}','php{{php_version}}-fpm','php{{php_version}}-apcu','php{{php_version}}-cli','php{{php_version}}-bz2','php{{php_version}}-common','php{{php_version}}-curl','php{{php_version}}-gd','php{{php_version}}-geoip','php{{php_version}}-imagick','php{{php_version}}-imap','php{{php_version}}-intl','php{{php_version}}-json','php{{php_version}}-mbstring','php{{php_version}}-memcache','php{{php_version}}-mysql','php{{php_version}}-mongodb','php{{php_version}}-pgsql','php{{php_version}}-redis','php{{php_version}}-sqlite3','php{{php_version}}-tidy','php{{php_version}}-xml','php{{php_version}}-zip','php-pear']
+  when: php_version >= "7.1"
+
+- name: Install Composer
+  get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /usr/bin/composer
+    mode: 0750
+
+- name: Configure PHP
+  copy:
+    src: php-ubuntu.ini
+    dest: /etc/php/{{php_version}}/fpm/php.ini
+
+- name: Restart PHP-FPM
+  service:
+    name: php{{php_version}}-fpm
+    state: restarted
+    enabled: yes
+
+- name: Create a PHP  symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: '/etc/php/{{php_version}}/fpm',dest: /data/config/php}  
+    - {src: '/var/log/php{{php_version}}-fpm.log',dest: '/data/logs/php{{php_version}}-fpm.log'}

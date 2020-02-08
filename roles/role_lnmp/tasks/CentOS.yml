@@ -1,0 +1,42 @@
+- name: Configure PHP-FPM
+  template:
+    src: cnetos-php-fpm.jinja2
+    dest: /etc/php-fpm.d/www.conf
+
+- name: Restart PHP-FPM
+  service:
+    name: php-fpm
+    state: restarted
+    enabled: yes
+
+- name: Create extra Dir
+  file:
+    path: /etc/nginx/extra
+    state: directory
+
+- name: Support PHP
+  copy:
+    src: php.conf
+    dest: /etc/nginx/extra/
+
+- name: Copy Default Vhost config
+  copy: 
+    src: centos-nginx-default.conf
+    dest: /etc/nginx/conf.d/default.conf
+
+- name: Create default website Dir
+  file: 
+    path: /data/wwwroot/www.example.com
+    state: directory
+    owner: nginx
+    group: nginx
+
+
+- name: Restart Nginx
+  service:
+    name: nginx
+    state: restarted
+
+
+- name: phpinfo
+  shell: echo "<?php phpinfo(); ?>" > /data/wwwroot/www.example.com/index.php
