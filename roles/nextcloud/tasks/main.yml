@@ -80,7 +80,7 @@
   - name: restart Apache
     service: name=httpd state=restarted enabled=yes
 
- when: nextcloud_webs == "apache"
+when: {{nextcloud_webs}} == "apache"
 
 
 #Nginx
