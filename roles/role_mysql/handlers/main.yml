@@ -1,3 +1,0 @@
-- name: MySQL Version
-  debug:
-    var: mysql_ver.stdout

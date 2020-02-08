@@ -57,7 +57,21 @@
 
 - name: pip requirements
   pip:
+    name: pip
+    extra_args: -U
+
+- name: pip requirements
+  pip:
+    name: pip
+    extra_args: -U
+    executable: pip3
+  when: ansible_os_family == 'Debian'
+  
+- name: pip upgrade
+  pip:
     name: pexpect
+
+
 
 - name: Set swapiness
   sysctl:
