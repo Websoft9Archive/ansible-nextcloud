@@ -29,9 +29,6 @@
 - src: http://github.com/websoft9dev/role_end
   version: master
 
-- src: http://github.com/websoft9dev/role_9panel
-  version: master
-
 - src: http://github.com/websoft9dev/role_lamp
   version: master
 
@@ -42,4 +39,7 @@
   version: master
 
 - src: http://github.com/websoft9dev/role_docker_onlyofficedocumentserver
+  version: master
+ 
+- src: http://github.com/websoft9dev/role_9panel
   version: master
