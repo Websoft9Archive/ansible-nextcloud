@@ -1,1 +1,35 @@
 nextcloud_version: 18.0.0
+
+#Web服务器，apache | nginx
+nextcloud_webs: apache
+
+#Nextcloud安装元数据，适用于在不同的环境下安装
+
+nextcloud_runtime_meta:
+  CentOS:
+    apache:
+      vhost_dir: /etc/httpd/vhost
+      vhost_src: vhost.conf
+      service: httpd
+      owner: apache
+    nginx:
+      vhost_dir: /etc/nginx/conf.d
+      vhost_src: default.conf
+      service: nginx
+      owner: apache
+  Ubuntu:
+    apache:
+      vhost_dir: /etc/apache2/sites-enabled
+      vhost_src: vhost.conf
+      service: apache2
+      owner: www-data
+    nginx:
+      host_dir: /etc/nginx/conf.d
+      vhost_src: default.conf
+      service: nginx
+      owner: www-data
+
+nextcloud_vhost_dir: nextcloud_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_dir
+nextcloud_vhost_src: nextcloud_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_src
+nextcloud_service: nextcloud_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.service
+nextcloud_owner: nextcloud_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.owner
