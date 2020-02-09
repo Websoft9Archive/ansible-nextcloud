@@ -1,6 +1,7 @@
-nextcloud_version: 18.0.0
+#NextCloud版本，需定期维护
+nextcloud_version: v18.0.0
 
-#Web服务器，apache | nginx
+#Web服务器：apache | nginx，通过交互式选择获取
 nextcloud_webs: apache
 
 #Nextcloud安装元数据，适用于在不同的环境下安装
