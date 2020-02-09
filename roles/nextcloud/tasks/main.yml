@@ -56,7 +56,8 @@
   shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
 
 
-# 根据基础环境分别处理
+# 根据不同的基础环境分别处理
+
 - block:
   - name: change owner&group for Apache
     shell: chown -R {{nextcloud_owner}}:{{nextcloud_owner}} /data/wwwroot
