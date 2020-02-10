@@ -3,10 +3,12 @@
 
 include_vars: roles/role_php-fpm/vars/php_runtime_meta.yml
 
-nextcloud_vhost_dir: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_dir
-nextcloud_vhost_src: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_src
-nextcloud_service: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.service
-nextcloud_owner: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.owner
+- name: Create var for this playbook
+  set_fact:
+  nextcloud_vhost_dir: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_dir
+  nextcloud_vhost_src: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_src
+  nextcloud_service: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.service
+  nextcloud_owner: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.owner
 
 # 9panel
 - name: Enable 9panel I
