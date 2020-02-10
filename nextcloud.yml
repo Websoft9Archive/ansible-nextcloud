@@ -33,6 +33,7 @@
     - {role: role_init_password, tags: "role_init_password"}
     - {role: role_phpmyadmin, tags: "role_phpmyadmin"}
     - {role: role_9panel, tags: "role_9panel"}
+    - {role: role_redis, tags: "role_redis"}
     - {role: role_docker, tags: "role_docker"}
     - {role: role_docker_onlyofficedocumentserver, tags: "role_docker_onlyofficedocumentserver"}
     - {role: nextcloud, tags: "nextcloud"}

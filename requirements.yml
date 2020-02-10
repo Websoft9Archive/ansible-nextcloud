@@ -8,6 +8,9 @@
 - src: http://github.com/websoft9dev/role_apache
   version: master
 
+- src: http://github.com/websoft9dev/role_redis
+  version: master
+
 - src: http://github.com/websoft9dev/role_nginx
   version: master  
 
