@@ -1,7 +1,7 @@
 ---
 #引入PHP运行环境元数据，并初始化
 
-#include_vars: roles/role_php-fpm/vars/php_runtime_meta.yml
+- include_vars: roles/role_php-fpm/vars/php_runtime_meta.yml
 
 #Create var for this playbook
 - set_fact:
@@ -84,7 +84,7 @@
       day: "*"
       month: "*"
       weekday: "*"
-      user: {{nextcloud_owner}}
+      user: "{{nextcloud_owner}}"
       job: "php -f /data/wwwroot/nextcloud/cron.php"
     
   - name: restart Apache or Nginx
