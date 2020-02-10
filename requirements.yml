@@ -17,8 +17,8 @@
 - src: http://github.com/websoft9dev/role_php-fpm
   version: master
 
-#- src: http://github.com/websoft9dev/role_inotify_watch
-#  version: master
+- src: http://github.com/websoft9dev/role_inotify_watch
+  version: master
 
 - src: http://github.com/websoft9dev/role_phpmyadmin
   version: master
