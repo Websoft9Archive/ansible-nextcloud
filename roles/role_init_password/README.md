@@ -36,13 +36,17 @@ init_db:
 
 
 init_application:
-  application_name: 
-  application_service:
-  application_database: 
-  application_database_user:
-  application_database_host: 
-  application_database_password: 
-  application_config_path: []
+  application:
+    service: 
+    database: 
+    database_user: 
+    database_host: 
+    database_password: 
+    random_password: 
+    default_account: 
+    default_password: 
+    random_password_method: 
+    config_path:
 
 
 
@@ -92,14 +96,14 @@ init_db:
 
 
 init_application:
-  application_name: example
-  application_service: php-fpm
-  application_database: example 
-  application_database_user: example
-  application_database_host: localhost
-  application_database_password: example_password
-  application_config_path: 
-    - /data/config/example.config
+  wordpress:
+    service: php-fpm
+    database: wordpress
+    database_user: wordpress
+    database_host: 127.0.0.1
+    database_password: 123456
+    config_path: 
+      - xxx/xxxx
 
 ```
 

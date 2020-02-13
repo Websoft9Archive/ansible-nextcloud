@@ -40,15 +40,11 @@
       dest: /data/apps/phpmyadmin/
   
   - block:
-    - name: get root's password of mysql
-      shell: cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}'
-      register: mysql_password
-
     - name: Active phpMyAdmin 4.0.x Advanced Features
       mysql_db:
         config_file: /etc/my.cnf
         login_user: root
-        login_password: "{{mysql_password.stdout}}"
+        login_password: "{{phpmyadmin_mysql_password}}"
         name: phpmyadmin
         state: import
         target: /data/apps/phpmyadmin/examples/create_tables.sql
@@ -58,7 +54,7 @@
       mysql_db:
         config_file: /etc/my.cnf
         login_user: root
-        login_password: "{{mysql_password.stdout}}"
+        login_password: "{{phpmyadmin_mysql_password}}"
         name: phpmyadmin
         state: import
         target: /data/apps/phpmyadmin/sql/create_tables.sql

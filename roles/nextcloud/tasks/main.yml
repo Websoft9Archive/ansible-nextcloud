@@ -53,13 +53,21 @@
     mode: "u+x,g+x"
 
 - name: copy config
-  copy:
-    src: config.php
-    dest: /data/wwwroot/nextcloud/config
+  copy: src=config.php  dest=/data/wwwroot/nextcloud/config
 
 - name: Set NextCloud Job
   command: php -f /data/wwwroot/nextcloud/cron.php
 
+  - name: NextCloud cron
+    cron:
+      name: "NextCloud cron"
+      minute: "*/15"
+      hour: "*"
+      day: "*"
+      month: "*"
+      weekday: "*"
+      user: "{{nextcloud_owner}}"
+      job: "php -f /data/wwwroot/nextcloud/cron.php"
 
 # 系统通用
 
@@ -78,17 +86,6 @@
 
   - name: Copy Apache or Nginx vhost configuration
     template: src={{nextcloud_vhost_src}} dest={{nextcloud_vhost_dir}}
-
-  - name: NextCloud cron
-    cron:
-      name: "NextCloud cron"
-      minute: "*/15"
-      hour: "*"
-      day: "*"
-      month: "*"
-      weekday: "*"
-      user: "{{nextcloud_owner}}"
-      job: "php -f /data/wwwroot/nextcloud/cron.php"
     
   - name: restart Apache or Nginx
     service: name={{nextcloud_service}} state=restarted enabled=yes

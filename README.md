@@ -11,10 +11,10 @@
 
 | 条件       | 详情       | 备注  |
 | ------------ | ------------ | ----- |
-| 操作系统       | CentOS7.x, Ubuntu18.04, Amazon Linux2       |  可选  |
+| 操作系统       | CentOS7.x       |  可选  |
 | 公有云| AWS, Azure, 阿里云, 华为云, 腾讯云 | 可选 |
 | 私有云|  KVM, VMware, VirtualBox, OpenStack | 可选 |
-| 服务器配置 | 最低1核1G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |  
+| 服务器配置 | 最低1核1G，安装时所需的带宽不低于10M | 建议采用按量100M带宽 |  
 
 更多配置要求参考官方文档：[《System Requirements》](https://docs.nextcloud.com/server/18/admin_manual/installation/source_installation.html)
 
@@ -26,9 +26,7 @@
 
 ## 本项目安装的是 Nextcloud 最新版吗？
 
-本项目是下载[Nextcloud源码](https://github.com/nextcloud/server/releases)的方式安装。 下载地址通过 []
-
-查看 [nextcloud.yml](/nextcloud.yml) 文件中版本选择的内容，来查看和维护具体的详细版本号
+本项目是下载Github上[Nextcloud源码](https://github.com/nextcloud/server/releases)安装。具体版本号可在 [Nextcloud 仓库](https://github.com/nextcloud/server.git)的 [tags列表](https://github.com/nextcloud/server/tags) 查询，根据需求更改[main.yml 文件](/roles/nextcloud/defaults/main.yml) 中的 ```nextcloud_version``` 版本号。
 
 我们会定期检查版本准确性，并增加官方最新的stable版本，以保证用户可以顺利安装所需的Nextcloud版本。
 
@@ -60,5 +58,5 @@ wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/i
 - 本项目支持在 Ansible Tower 上运行吗？支持
 
 ## To do
-
-* Ubuntu,AmazonLinux支持
+* 添加 Nginx 支持
+* 添加 Ubuntu,AmazonLinux 支持

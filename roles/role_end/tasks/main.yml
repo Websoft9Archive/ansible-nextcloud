@@ -9,7 +9,7 @@
     register: cloud
 
   - name: Remove SSH info
-    shell: rm -rf {{item}}
+    shell: sudo rm -rf {{item}}
     with_items:
       - /home/*/.ssh
       - /root/.ssh

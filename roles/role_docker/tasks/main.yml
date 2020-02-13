@@ -48,11 +48,14 @@
 - name: pip requirements
   pip:
     name: docker
+    extra_args:  --ignore-installed
+
 
 - name: pip requirements II
   pip:
     name: docker-compose
-    executable: pip3
+    executable: pip3 
+    extra_args:  --ignore-installed
   when: ansible_os_family == 'Debian'
 
 - name: Started Docker

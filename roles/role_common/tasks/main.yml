@@ -24,6 +24,8 @@
 
   - reboot:
       reboot_timeout: 3600
+      connect_timeout: 3600
+      
   - name: Install PiP
     yum:
       name: python-pip

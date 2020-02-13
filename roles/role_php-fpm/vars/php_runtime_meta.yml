@@ -17,7 +17,7 @@ php_runtime_meta:
       service: apache2
       owner: www-data
     nginx:
-      host_dir: /etc/nginx/conf.d
+      vhost_dir: /etc/nginx/conf.d
       vhost_src: default.conf
       service: nginx
       owner: www-data

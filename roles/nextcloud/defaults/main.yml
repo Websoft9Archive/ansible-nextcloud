@@ -3,3 +3,8 @@ nextcloud_version: v18.0.0
 
 #Web服务器：apache | nginx，通过交互式选择获取
 nextcloud_webs: apache
+
+moodle_vhost_dir: /etc/httpd/vhost
+moodle_vhost_src: vhost.conf
+moodle_service: httpd
+moodle_owner: apache
