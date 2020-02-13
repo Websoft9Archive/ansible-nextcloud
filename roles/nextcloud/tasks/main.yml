@@ -5,10 +5,10 @@
 
 #Create var for this playbook
 - set_fact:
-    nextcloud_vhost_dir: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_dir
-    nextcloud_vhost_src: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.vhost_src
-    nextcloud_service: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.service
-    nextcloud_owner: php_runtime_meta.{{ansible_distribution}}.{{nextcloud_webs}}.owner
+    nextcloud_vhost_dir: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].vhost_dir}}"
+    nextcloud_vhost_src: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].vhost_src}}"
+    nextcloud_service: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].service}}"
+    nextcloud_owner: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].owner}}"
 
 - debug:
     msg: runtime {{ nextcloud_vhost_dir }}, {{nextcloud_vhost_src}}, {{nextcloud_service}}, {{nextcloud_owner}}, {{nextcloud_webs}}, {{ansible_distribution}}
