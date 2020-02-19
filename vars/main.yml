@@ -1,12 +1,11 @@
+#全局
+region: "1"
+
 # MySQL 版本和默认密码
 mysql_version: "5.7"       # centos版本 5.5 5.6 5.7  Ubuntu支持5.7和8.0
 mysql_root_password: "123456"
 phpmyadmin_mysql_password: "123456"
 php_version: "7.2"
-
-# Redis国内下载链接
-redis_download_url: https://libs.websoft9.com/apps/redis
-php_getcomposer_url: https://libs.websoft9.com/apps/composer/composer.phar
 
 # 生成应用数据库和用户
 mysql_databases:
