@@ -1,6 +1,0 @@
----
-- name: restart Apache
-  service: name=httpd state=restarted enabled=yes
-
-- name: restart MySQL
-  service: name=mysqld state=restarted enabled=yes

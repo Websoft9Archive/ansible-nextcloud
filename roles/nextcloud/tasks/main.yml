@@ -81,7 +81,7 @@
 # 根据不同的基础环境分别处理
 
 - block:
-  - name: change owner&group for Apache
+  - name: change owner&group
     shell: chown -R {{nextcloud_owner}}:{{nextcloud_owner}} /data/wwwroot
 
   - name: Copy Apache or Nginx vhost configuration
