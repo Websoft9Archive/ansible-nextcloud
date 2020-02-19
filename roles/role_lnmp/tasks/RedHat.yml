@@ -38,5 +38,9 @@
     state: restarted
 
 
-- name: phpinfo
-  shell: echo "<?php phpinfo(); ?>" > /data/wwwroot/www.example.com/index.php
+- name: Create default website Dir
+  file: 
+    path: /data/wwwroot/www.example.com
+    state: directory
+    owner: nginx
+    group: nginx

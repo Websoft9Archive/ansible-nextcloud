@@ -1,16 +1,20 @@
 ---
+- name: Check HTTP Server type
+  shell: "curl -Is http://127.0.0.1 | grep 'Server' |awk -F ': ' '{print $2}'|tr 'A-Z' 'a-z'"
+  register: http_type
 
 - name: Create apps directory
   file: 
       path: /data/apps
       state: directory
-      owner: apache
-      group: apache
+      owner: "{{http_type.stdout}}"
+      group: "{{http_type.stdout}}"
 
 - name: Download 9panel
   git:
     repo: https://github.com/Websoft9/9panel.git
     dest: /data/apps/9panel
+    version: latest
 
 
 - name: Set default site I
@@ -32,12 +36,22 @@
 - name: Change apps directory Own
   file: 
       path: /data/apps
-      owner: apache
-      group: apache
+      owner: "{{http_type.stdout}}"
+      group: "{{http_type.stdout}}"
       recurse: yes
 
-- name: Copy 9panel Configuration
-  copy: src=9panel.conf dest=/etc/httpd/conf.d/
+- block:
+  - name: Copy 9panel Configuration
+    copy: src=9panel.conf dest=/etc/httpd/conf.d/
 
-- name: restart Apache
-  service: name=httpd state=restarted enabled=yes
+  - name: restart Apache
+    service: name=httpd state=restarted enabled=yes
+  when: http_type.stdout == "apache"
+
+- block: 
+  - name: Copy 9panel Configuration
+    copy: src=9panel-nginx.conf dest=/etc/nginx/extra/9panel.conf
+
+  - name: restart Nginx
+    service: name=nginx state=restarted enabled=yes
+  when: http_type.stdout == "nginx"

@@ -1,7 +1,7 @@
 - block:
   - name: install the IUS rpm from a remote repo
     yum:
-      name: https://rhel7.iuscommunity.org/ius-release.rpm
+      name: "{{apache_ius_url}}"
       state: present
 
   - name: Install Apache
@@ -64,7 +64,7 @@
 
 - name: Link Apache service
   file:
-    src: /usr/lib/systemd/system/httd.service
+    src: /usr/lib/systemd/system/httpd.service
     dest: /usr/lib/systemd/system/apache.service
     state: link
 

@@ -10,9 +10,9 @@
 
 
 
-- name: Download Redis Source Code
+- name: Download Redis Source Code from {{redis_download_url}}
   unarchive:
-    src: http://download.redis.io/releases/redis-{{redis_version}}.tar.gz
+    src: "{{redis_download_url}}/redis-{{redis_version}}.tar.gz"
     dest: /opt/
     remote_src: yes
 
@@ -61,10 +61,11 @@
     - {src:  /etc/redis/redis.conf,dest: /etc/redis.conf} 
     - {src: /data/redis,dest: /var/lib/redis} 
 
+
 - name: Check redis Version
   shell: /usr/local/bin/redis-server -v
   register: redis_version
   args:
     executable: /bin/bash
-  notify: [redis Version,Check redis Server]
+  notify: redis Version
 

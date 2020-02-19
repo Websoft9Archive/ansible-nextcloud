@@ -36,55 +36,50 @@
     state: restarted
     enabled: yes
 
-- block:
-  - name: Get temporary MySQL57+ root password
-    shell: grep 'A temporary password is generated for root@localhost:' /var/log/messages | awk '{print $NF}'| tail -n1
-    register: mysql_root_temp_password
-    
-  - name: Disable  validate password plugin
-    lineinfile:
-      dest: /etc/my.cnf
-      regexp: '#validate_password=OFF' 
-      line: 'validate_password=OFF'
-    when: (mysql_version == 5.7) or (mysql_version == '5.7')
-  
-  - name: Disable  validate password plugin
-    lineinfile:
-      dest: /etc/my.cnf
-      regexp: "{{item.regexp}}"
-      line: "{{item.line}}"
-    with_items:
-      - {regexp: "#validate_password.check_user_name=OFF" ,line: validate_password.check_user_name=OFF}
-      - {regexp: "#validate_password.length=4" ,line: validate_password.length=4}
-      - {regexp: "#validate_password.mixed_case_count=0" ,line: validate_password.mixed_case_count=0}
-      - {regexp: "#validate_password.number_count=0" ,line: validate_password.number_count=0}
-      - {regexp: "#validate_password.policy=0" ,line: validate_password.policy=0}
-      - {regexp: "#validate_password.special_char_count=0" ,line: validate_password.special_char_count=0}
-    when: (mysql_version == 8.0) or (mysql_version == '8.0')
+- name: Clean MySQL Password
+  shell: |
+    systemctl stop mysqld
+    mysqld --console --skip-grant-tables  --user=mysql &
+    sleep 5
+    {% if mysql_version <= "5.6" %}
+    mysql -e "use mysql;update user set password=password('') where user='root';"
+    {% endif %}
+    {% if mysql_version == "5.7" %}
+    mysql -e "use mysql;update user set authentication_string = password('') where user = 'root';"
+    {% endif %}
+    {% if mysql_version == "8.0" %}
+    mysql -e "use mysql;update user set authentication_string = '' where user = 'root';"
+    {% endif %}
+    ps aux | grep "mysqld" |grep -v grep| cut -c 9-15 | xargs kill -9
+    sleep 5
+    systemctl restart mysqld
 
+- name: Disable  validate password plugin
+  lineinfile:
+    dest: /etc/my.cnf
+    regexp: '#validate_password=OFF' 
+    line: 'validate_password=OFF'
+  when: mysql_version == '5.7'
 
-  - name: Restart MySQL{{mysql_version}} Service
-    service: name=mysqld state=restarted enabled=yes
-
-  - name: Change MySQL57+ root user password 
-    shell: mysqladmin -u root --password="{{ mysql_root_temp_password.stdout }}" password "{{mysql_root_password}}"
-
-
-
-
-  when: (mysql_version == 5.7) or (mysql_version == '5.7') or (mysql_version == 8.0) or (mysql_version == '8.0')
-
-- name: Change MySQL{{ mysql_version }} root user password 
-  mysql_user: 
-    name: root 
-    host: "{{ item }}" 
-    password: "{{mysql_root_password}}"
-    login_unix_socket: /var/lib/mysql/mysql.sock
+- name: Disable  validate password plugin
+  lineinfile:
+    dest: /etc/my.cnf
+    regexp: "{{item.regexp}}"
+    line: "{{item.line}}"
   with_items:
-    - 127.0.0.1
-    - ::1
-    - localhost
-  when: (mysql_version == 5.5) or (mysql_version == '5.5') or (mysql_version == 5.6) or (mysql_version == '5.6')
+    - {regexp: "#validate_password.check_user_name=OFF" ,line: validate_password.check_user_name=OFF}
+    - {regexp: "#validate_password.length=4" ,line: validate_password.length=4}
+    - {regexp: "#validate_password.mixed_case_count=0" ,line: validate_password.mixed_case_count=0}
+    - {regexp: "#validate_password.number_count=0" ,line: validate_password.number_count=0}
+    - {regexp: "#validate_password.policy=0" ,line: validate_password.policy=0}
+    - {regexp: "#validate_password.special_char_count=0" ,line: validate_password.special_char_count=0}
+  when: mysql_version == '8.0'
+
+- name: Restart MySQL{{mysql_version}} Service
+  service: name=mysqld state=restarted enabled=yes
+
+- name: Setting MySQL Password
+  shell: mysqladmin -uroot --password='' password {{mysql_root_password}}
 
 
 - name: Removes all anyelse user accounts

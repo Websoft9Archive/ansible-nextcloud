@@ -1,1 +1,2 @@
 redis_version: stable 
+redis_download_url: http://download.redis.io/releases

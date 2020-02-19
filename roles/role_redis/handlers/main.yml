@@ -1,6 +1,6 @@
 - name: redis Version
   debug:
-    var: redis_ver.stdout
+    var: redis_version.stdout
 
 - name: Check redis Server
   debug:

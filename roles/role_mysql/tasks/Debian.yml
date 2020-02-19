@@ -16,9 +16,8 @@
 - name: Change MySQL Directory
   shell: |
     systemctl stop mysql
+    rm -rf /data/mysql
     rsync -av /var/lib/mysql /data/
-    mv /var/lib/mysql /var/lib/mysql.bak
-    mkdir /var/lib/mysql/mysql -p
     sed  -i 's/\/var\/lib\/mysql/\/data\/mysql/'  /etc/mysql/mysql.conf.d/mysqld.cnf
     echo "alias /var/lib/mysql/ -> /data/mysql/," >> /etc/apparmor.d/tunables/alias
     systemctl restart apparmor

@@ -16,24 +16,24 @@
         group: "{{http_type.stdout}}"
         mode: 0755
 
-  - name: Dowload phpMyAdmin
+  - name: Download phpMyAdmin
     unarchive:
-      src: https://files.phpmyadmin.net/phpMyAdmin/4.0.10.20/phpMyAdmin-4.0.10.20-all-languages.zip
+      src: "{{phpmyadmin_download_url.old}}"
       dest: /data/apps
       remote_src: yes
-    when: phpver == "54"
+    when: phpmyadmin_php_version <= "5.4"
 
-  - name: Dowload phpMyAdmin
+  - name: Download phpMyAdmin
     unarchive:
-      src: https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-all-languages.zip
+      src: "{{phpmyadmin_download_url.new}}"
       dest: /data/apps
       remote_src: yes
-    when: phpver != "54"
+    when: phpmyadmin_php_version > "5.5"
 
   - name: phpMyadmin directory rename
     shell: mv /data/apps/phpMyAdmin-* /data/apps/phpmyadmin
+    ignore_errors: True
   
-
   - name: phpMyadmin Configuration
     copy: 
       src: config.inc.php
@@ -48,7 +48,7 @@
         name: phpmyadmin
         state: import
         target: /data/apps/phpmyadmin/examples/create_tables.sql
-      when: phpver == "54"
+      when: phpmyadmin_php_version <= "5.4"
 
     - name: Active phpMyAdmin 4.x Advanced Features
       mysql_db:
@@ -58,7 +58,7 @@
         name: phpmyadmin
         state: import
         target: /data/apps/phpmyadmin/sql/create_tables.sql
-      when: phpver != "54"
+      when: phpmyadmin_php_version >= "5.5"
     when: check_mysqlserver.stdout == '0'
 
 
@@ -98,7 +98,7 @@
 
     when: http_type.stdout == 'nginx'
 
-  when: ansible_distribution == 'CentOS'
+  when: ansible_os_family == 'RedHat'
 
 - debug: msg="Not Support Ubuntu"
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_os_family == 'Debian'
