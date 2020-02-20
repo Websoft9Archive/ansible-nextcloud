@@ -6,7 +6,7 @@
   vars_files:
     - vars/main.yml 
   vars_prompt:
-    - name: 'webserver_select'
+    - name: 'webs_selection'
       prompt: "\nWhich Web-Server do you want to use? [ 1/2 ] \n\n
       1: Apache\n
       2: Nginx\n"
@@ -14,10 +14,20 @@
       default: 1
 
   vars:
-    temp_ver:
+
+    webs_select:
       '1': 'apache'
       '2': 'nginx'
-    nextcloud_webs: "{{temp_ver[webserver_select]}}" 
+
+    infrastructure_select:
+      '1': 'LAMP'
+      '2': 'LNMP'
+
+    moodle_webs: "{{webs_select[webs_selection]}}" 
+
+    w9panel_set_infrastructure: "{{infrastructure_select[webs_selection]}}" 
+    w9panel_set_apps: 
+      - Moodle
   
   pre_tasks:
     - include_vars: roles/role_cloud/vars/cloud_download_url.yml

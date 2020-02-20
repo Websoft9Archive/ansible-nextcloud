@@ -9,16 +9,13 @@
     nextcloud_vhost_src: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].vhost_src}}"
     nextcloud_service: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].service}}"
     nextcloud_owner: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].owner}}"
+    nextcloud_name: "nextcloud"
+    nextcloud_title: "NextCloud"
+    nextcloud_download_url: "https://github.com/nextcloud/server.git"
+    nextcloud_version: "v18.0.0"
 
 - debug:
     msg: runtime {{ nextcloud_vhost_dir }}, {{nextcloud_vhost_src}}, {{nextcloud_service}}, {{nextcloud_owner}}, {{nextcloud_webs}}, {{ansible_distribution}}
-
-# 9panel
-- name: Enable 9panel I
-  lineinfile:
-    path: /data/apps/9panel/js/websoft9.js
-    regexp: 'var set_apps=\["Example"\];'
-    line: 'var set_apps=["NextCloud"];'
 
 # NextCloud
 - name: Delete www.example.com directory
@@ -26,15 +23,20 @@
     path: /data/wwwroot/www.example.com
     state: absent
 
-- name: Create Directory
+- name: Delete existing directory
   file:
-    path: /data/wwwroot/nextcloud
+    path: /data/wwwroot/{{nextcloud_name}}
+    state: absent
+
+- name: Create app Directory
+  file:
+    path: /data/wwwroot/{{nextcloud_name}}
     state: directory
     mode: 0755
 
 - name: Download NextCloud
   git:
-    repo: https://github.com/nextcloud/server.git
+    repo: "{{nextcloud_download_url}}"
     dest: /data/wwwroot/nextcloud
     version: "{{nextcloud_version}}"
 
@@ -85,7 +87,7 @@
     shell: chown -R {{nextcloud_owner}}:{{nextcloud_owner}} /data/wwwroot
 
   - name: Copy Apache or Nginx vhost configuration
-    template: src={{nextcloud_vhost_src}} dest={{nextcloud_vhost_dir}}
+    copy: src={{nextcloud_vhost_src}} dest={{nextcloud_vhost_dir}}
     
   - name: restart Apache or Nginx
     service: name={{nextcloud_service}} state=restarted enabled=yes
