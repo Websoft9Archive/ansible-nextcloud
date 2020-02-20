@@ -18,15 +18,8 @@
     msg: runtime {{ nextcloud_vhost_dir }}, {{nextcloud_vhost_src}}, {{nextcloud_service}}, {{nextcloud_owner}}, {{nextcloud_webs}}, {{ansible_distribution}}
 
 # NextCloud
-- name: Delete www.example.com directory
-  file:
-    path: /data/wwwroot/www.example.com
-    state: absent
-
-- name: Delete existing directory
-  file:
-    path: /data/wwwroot/{{nextcloud_name}}
-    state: absent
+- name: Remove extra dir
+  shell: rm -rf /data/wwwroot/*
 
 - name: Create app Directory
   file:
@@ -39,9 +32,6 @@
     repo: "{{nextcloud_download_url}}"
     dest: /data/wwwroot/nextcloud
     version: "{{nextcloud_version}}"
-
-- name: Rename directory name
-  shell: mv /data/wwwroot/* /data/wwwroot/{{nextcloud_name}}
 
 -  name: Set OPCache for NextCloud
    copy: src=opcache.ini dest=/etc/php.d/opcache.ini
