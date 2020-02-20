@@ -40,6 +40,9 @@
     dest: /data/wwwroot/nextcloud
     version: "{{nextcloud_version}}"
 
+- name: Rename directory name
+  shell: mv /data/wwwroot/* /data/wwwroot/{{nextcloud_name}}
+
 -  name: Set OPCache for NextCloud
    copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
