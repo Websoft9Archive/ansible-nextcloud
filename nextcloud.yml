@@ -33,6 +33,9 @@
     - include_vars: roles/role_cloud/vars/cloud_download_url.yml
       when: region == '1' or region == 1
 
+    - debug:
+        msg: NextCloud will be installed on {{w9panel_set_infrastructure}}, OS is {{ansible_distribution}}, region code is {{region}}
+
   roles:
     - {role: role_common, tags: "role_common"}
     - {role: role_cloud, tags: "role_cloud"}

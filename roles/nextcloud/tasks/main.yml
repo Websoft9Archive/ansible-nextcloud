@@ -9,17 +9,15 @@
     nextcloud_vhost_src: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].vhost_src}}"
     nextcloud_service: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].service}}"
     nextcloud_owner: "{{php_runtime_meta[ansible_distribution][nextcloud_webs].owner}}"
-    nextcloud_name: "nextcloud"
-    nextcloud_title: "NextCloud"
-    nextcloud_download_url: "https://github.com/nextcloud/server.git"
-    nextcloud_version: "v18.0.0"
 
 - debug:
     msg: runtime {{ nextcloud_vhost_dir }}, {{nextcloud_vhost_src}}, {{nextcloud_service}}, {{nextcloud_owner}}, {{nextcloud_webs}}, {{ansible_distribution}}
 
 # NextCloud
 - name: Remove extra dir
-  shell: rm -rf /data/wwwroot/*
+  shell: |
+    rm -rf /data/wwwroot/www.example.com
+    rm -rf /data/wwwroot/{{nextclod_name}}
 
 - name: Create app Directory
   file:
