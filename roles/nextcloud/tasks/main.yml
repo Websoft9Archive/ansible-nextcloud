@@ -32,7 +32,7 @@
     version: "{{nextcloud_version}}"
 
 - name: Rename dir name
-  shell: if [ ! -d "/data/wwwroot/{{nextcloud_name}}" ]; then mv *{{nextcloud_name}}* {{nextcloud_name}}; fi
+  shell: cd /data/wwwroot; if [ ! -d "{{nextcloud_name}}" ]; then mv *{{nextcloud_name}}* {{nextcloud_name}}; fi
 
 -  name: Set OPCache for NextCloud
    copy: src=opcache.ini dest=/etc/php.d/opcache.ini
