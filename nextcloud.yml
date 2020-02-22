@@ -24,7 +24,8 @@
       '2': 'LNMP'
 
     moodle_webs: "{{webs_select[webs_selection]}}" 
-
+    phpmyadmin_webs: "{{webs_select[webs_selection]}}" 
+    w9panel_webs: "{{webs_select[webs_selection]}}" 
     w9panel_set_infrastructure: "{{infrastructure_select[webs_selection]}}" 
     w9panel_set_apps: 
       - Moodle
