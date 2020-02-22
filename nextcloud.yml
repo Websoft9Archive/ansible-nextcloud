@@ -28,7 +28,7 @@
     w9panel_webs: "{{webs_select[webs_selection]}}" 
     w9panel_set_infrastructure: "{{infrastructure_select[webs_selection]}}" 
     w9panel_set_apps: 
-      - Moodle
+      - NextCloud
   
   pre_tasks:
     - include_vars: roles/role_cloud/vars/cloud_download_url.yml
