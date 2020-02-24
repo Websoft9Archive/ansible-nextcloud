@@ -122,7 +122,7 @@ Nextcloud source code and data is in system disk by default, you can transfer th
 
 Nextcloud can't preview and edit Office document itself, you need to integrate document Server service for Nextcloud to implement this function:
 
-1. Enable the **TCP:8080** port on **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)**
+1. Enable the **TCP:9003** port on **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)**
 2. Log in to Nextcloud console, go to 【Apps】page
 	 ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-olpreview-1-websoft9.png)
 3. Find the app【ONLYOFFICE】 and install it
