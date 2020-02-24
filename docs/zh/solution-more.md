@@ -125,7 +125,7 @@ Nextcloud 自身是不能对 Office 文件进行预览或编辑的，需要集�
 
 Websoft9 提供的 Nextcloud 部署包内置了 OnlyOffice Document Server(Docker版) ，此软件可以用于给 Nextcloud 提供文档预览与编辑服务，具体设置步骤如下：
 
-1. 开启服务器安全组的 8080 端口
+1. 开启服务器安全组的 9003 端口
 2. 登录到 Nextcloud ，单击左上角齿轮图标，点击【应用】
 	![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-olpreview-1-websoft9.png)
 3. 找到【ONLYOFFICE】插件，安装它
