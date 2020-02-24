@@ -28,6 +28,9 @@
 
 - src: http://github.com/websoft9dev/role_init_password
   version: master
+  
+- src: http://github.com/websoft9dev/role_preend
+  version: master
 
 - src: http://github.com/websoft9dev/role_end
   version: master
