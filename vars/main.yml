@@ -1,5 +1,5 @@
 #全局
-region: "1"
+region: "0"
 
 # MySQL 版本和默认密码
 mysql_version: "5.7"       

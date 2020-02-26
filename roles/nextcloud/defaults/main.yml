@@ -7,7 +7,5 @@ moodle_service: httpd
 moodle_owner: apache
 nextcloud_name: "nextcloud"
 nextcloud_title: "NextCloud"
-nextcloud_download_url: "https://github.com/nextcloud/server.git"
-
-#版本号需定期维护
-nextcloud_version: "v18.0.1"  
+#下载链接需定期维护
+nextcloud_download_url: "https://download.nextcloud.com/server/releases/nextcloud-18.0.1.zip"

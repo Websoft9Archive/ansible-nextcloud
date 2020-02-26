@@ -16,20 +16,13 @@
 # NextCloud
 - name: Remove extra dir
   shell: |
-    rm -rf /data/wwwroot/www.example.com
-    rm -rf /data/wwwroot/{{nextcloud_name}}
-
-- name: Create app Directory
-  file:
-    path: /data/wwwroot/{{nextcloud_name}}
-    state: directory
-    mode: 0755
+    rm -rf /data/wwwroot/*{{nextcloud_name}}*
 
 - name: Download NextCloud
-  git:
-    repo: "{{nextcloud_download_url}}"
+  unarchive:
+    src: "{{nextcloud_download_url}}"
     dest: /data/wwwroot/nextcloud
-    version: "{{nextcloud_version}}"
+    remote_src: yes
 
 - name: Rename dir name
   shell: cd /data/wwwroot; if [ ! -d "{{nextcloud_name}}" ]; then mv *{{nextcloud_name}}* {{nextcloud_name}}; fi
@@ -68,11 +61,9 @@
 # 系统通用
 
 - name: Permission directory
-  shell: find /data/wwwroot -type d -exec chmod 750 {} \;
-  
-- name: Permission file
-  shell: find /data/wwwroot -not -type d -exec chmod 640 {} \;
-
+  shell: |
+    find /data/wwwroot -type d -exec chmod 750 {} \;
+    find /data/wwwroot -not -type d -exec chmod 640 {} \;
 
 # 根据不同的基础环境分别处理
 
@@ -81,7 +72,7 @@
     shell: chown -R {{nextcloud_owner}}:{{nextcloud_owner}} /data/wwwroot
 
   - name: Copy Apache or Nginx vhost configuration
-    copy: src={{nextcloud_vhost_src}} dest={{nextcloud_vhost_dir}}
+    template: src={{nextcloud_vhost_src}} dest={{nextcloud_vhost_dir}}
     
   - name: restart Apache or Nginx
     service: name={{nextcloud_service}} state=restarted enabled=yes
