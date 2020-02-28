@@ -13,6 +13,13 @@
       private: no
       default: 1
 
+    - name: 'onlyoffice_selection'
+      prompt: "\nDo you want to install OnlyOffice documentserver? [ 1/2 ] \n\n
+      1: Yes\n
+      2: No\n"
+      private: no
+      default: 1
+
   vars:
 
     webs_select:
@@ -23,7 +30,12 @@
       '1': 'LAMP'
       '2': 'LNMP'
 
-    moodle_webs: "{{webs_select[webs_selection]}}" 
+    onlyoffice_select:
+      '1': 'yes'
+      '2': ''
+
+    nextcloud_webs: "{{webs_select[webs_selection]}}" 
+    nextcloud_onlyoffice: "{{onlyoffice_select[onlyoffice_selection]}}" 
     phpmyadmin_webs: "{{webs_select[webs_selection]}}" 
     w9panel_webs: "{{webs_select[webs_selection]}}" 
     w9panel_set_infrastructure: "{{infrastructure_select[webs_selection]}}" 
@@ -50,8 +62,8 @@
     - {role: role_phpmyadmin, tags: "role_phpmyadmin"}
     - {role: role_9panel, tags: "role_9panel"}
     - {role: role_redis, tags: "role_redis"}
-    - {role: role_docker, tags: "role_docker"}
-    - {role: role_docker_onlyofficedocumentserver, tags: "role_docker_onlyofficedocumentserver"}
+    - {role: role_docker, tags: "role_docker", when: nextcloud_onlyoffice}
+    - {role: role_docker_onlyofficedocumentserver, tags: "role_docker_onlyofficedocumentserver", when: nextcloud_onlyoffice}
     - {role: nextcloud, tags: "nextcloud"}
     - {role: role_init_password, tags: "role_init_password"}
     - {role: role_preend, tags: "role_preend"}

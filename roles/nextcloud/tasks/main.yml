@@ -9,6 +9,7 @@
     nextcloud_vhost_src: "{{php_runtime_meta[ansible_os_family][nextcloud_webs].vhost_src}}"
     nextcloud_service: "{{php_runtime_meta[ansible_os_family][nextcloud_webs].service}}"
     nextcloud_owner: "{{php_runtime_meta[ansible_os_family][nextcloud_webs].owner}}"
+    nextcloud_db_password: "{{mysql_root_password}}"
 
 - debug:
     msg: runtime {{ nextcloud_vhost_dir }}, {{nextcloud_vhost_src}}, {{nextcloud_service}}, {{nextcloud_owner}}, {{nextcloud_webs}}, {{ansible_distribution}}
@@ -30,11 +31,6 @@
 -  name: Set OPCache for NextCloud
    copy: src=opcache.ini dest=/etc/php.d/opcache.ini
 
-- name: restart php-fpm
-  service:
-    name: php-fpm
-    state: restarted
-
 - name: Permission occ
   file:
     path: /data/wwwroot/nextcloud/occ
@@ -47,9 +43,9 @@
 - name: Set NextCloud Job
   command: php -f /data/wwwroot/nextcloud/cron.php
 
-- name: NextCloud cron
+- name: NextCloud cron job
   cron:
-    name: "nextcloud cron"
+    name: "nextcloud cron job"
     minute: "*/15"
     hour: "*"
     day: "*"
@@ -76,3 +72,6 @@
     
   - name: restart Apache or Nginx
     service: name={{nextcloud_service}} state=restarted enabled=yes
+
+  - name: restart php-fpm
+    service: name=php-fpm state=restarted

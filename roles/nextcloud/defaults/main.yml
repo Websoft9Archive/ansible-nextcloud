@@ -1,10 +1,11 @@
 #Web服务器：apache | nginx，通过交互式选择获取
 nextcloud_webs: apache
 
-moodle_vhost_dir: /etc/httpd/vhost
-moodle_vhost_src: vhost.conf
-moodle_service: httpd
-moodle_owner: apache
+nextcloud_vhost_dir: /etc/httpd/vhost
+nextcloud_vhost_src: vhost.conf
+nextcloud_service: httpd
+nextcloud_owner: apache
+nextcloud_db_password: "123456"
 nextcloud_name: "nextcloud"
 nextcloud_title: "NextCloud"
 #下载链接需定期维护
