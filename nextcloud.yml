@@ -31,7 +31,7 @@
       '2': 'LNMP'
 
     onlyoffice_select:
-      '1': 'yes'
+      '1': True
       '2': ''
 
     nextcloud_webs: "{{webs_select[webs_selection]}}" 
