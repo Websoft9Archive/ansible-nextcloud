@@ -48,7 +48,7 @@ phpMyAdmin vhost configuration file: */etc/httpd/conf.d/phpMyAdmin.conf* or */et
 
 ### Docker
 
-安装了 OnlyOffice Document Server（Docker版） 用于文档预览与编辑
+部分镜像安装了： OnlyOffice Document Server（Docker版），用于文档预览与编辑
 
 ### Redis
 
@@ -68,7 +68,7 @@ Redis logs file: */var/log/redis/redis.log*
 | HTTP | 80 | 通过 HTTP 访问 Nextcloud | 必须 |
 | HTTPS | 443 | 通过 HTTPS 访问 Nextcloud | 可选 |
 | MySQL | 3306 | 远程连接 MySQL | 可选 |
-| OnlyOffice Document Server on Docker | 8080 | 调用文档编辑与预览服务 | 可选 |
+| OnlyOffice Document Server on Docker | 9003 | 调用文档编辑与预览服务 | 可选 |
 
 ## 版本号
 

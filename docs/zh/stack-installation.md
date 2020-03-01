@@ -11,15 +11,23 @@
 ## Nextcloud 安装向导
 
 1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://Internet IP*, 就进入引导首页
+
 2. 系统首先要求设置一个管理员账号，选择 Nextcloud 的数据库存储方式，建议选择【MySQL】    
+
 3. 填写 MySQL 数据库连接信息（[不知道账号密码？](/zh/stack-accounts.html#mysql)）  
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-intall-websoft9.png)
-4.  点击“Flish Setup”，完成安装，获得安装成功的提示
-    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-intallss-websoft9.png)
+
+4. 点击“Flish Setup”，完成安装，获得安装成功的提示
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-intallss-websoft9.png)
+
 5. 关闭弹窗，开始体验后台
-     ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backend-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backend-websoft9.png)
+
 6. 进入Marketplace，扩展更多的功能
-     ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
+   
+7. 浏览器访问网址：*https://Internet IP:9003* 查看是否安装 **OnlyOffice Document Server**
+   ![](http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/Websoft9/DocsPicture/zh/onlyoffice/onlyoffice-documentserver-websoft9.png)
 
 > 需要了解更多 Nextcloud 的使用，请参考官方文档：[Nextcloud admin_manual](https://docs.nextcloud.com/server/latest/admin_manual/)
 
@@ -40,3 +48,7 @@
 #### Nextcloud 是否支持采用对象存储作为网盘使用？
 
 支持，但需要额外配置
+
+#### Nextcloud 是否支持在线文档编辑与预览？
+
+部分镜像预装了 OnlyOffice Document Server，可以通过配置实现在线文档编辑与预览

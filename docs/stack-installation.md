@@ -11,15 +11,23 @@ If you have completed the Nextcloud deployment on Cloud Platform, the following 
 ## Nextcloud Installation Wizard
 
 1. Using local Chrome or Firefox to visit the URL *https://domain* or *https://Internet IP*, start to install  
+
 2. You need to set administrator account, then set 【Storage&Database】, suggest select 【MySQL】
+
 3. Configure the MySQL database connection([Don't know password?](/stack-accounts.html#mysql)) 
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-intall-websoft9.png)
+   
 4. Click 【Flish Setup】, it has been installed successfully.
-    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-intallss-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-intallss-websoft9.png)
+
 5. Nextcloud Console
-     ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backend-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backend-websoft9.png)
+
 6. Go to Nextcloud's Marketplace, get more extensions  
-     ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
+
+7.Visit URL *https://Internet IP:9003* to check **OnlyOffice Document Server** been installed
+   ![](http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/Websoft9/DocsPicture/zh/onlyoffice/onlyoffice-documentserver-websoft9.png)
 
 > Refer to [Nextcloud admin_manual](https://docs.nextcloud.com/server/latest/admin_manual/) to get more details
 

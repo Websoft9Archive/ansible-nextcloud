@@ -65,7 +65,7 @@ These ports should be opened for this application:
 | MySQL | 3306 | Remote connect MySQL | Optional |
 | HTTP | 80 | HTTP requests for Nextcloud | Required |
 | HTTPS | 443 | HTTPS requests Nextcloud | Optional |
-| Docker | 8080 | OnlyOffice Document Server on Docker | Optional |
+| Docker | 9003 | OnlyOffice Document Server on Docker | Optional |
 
 ## Version
 
