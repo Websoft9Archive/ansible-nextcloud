@@ -9,4 +9,4 @@ nextcloud_db_password: "123456"
 nextcloud_name: "nextcloud"
 nextcloud_title: "NextCloud"
 #下载链接需定期维护
-nextcloud_download_url: "https://download.nextcloud.com/server/releases/nextcloud-18.0.1.zip"
+nextcloud_download_url: "https://download.nextcloud.com/server/releases/latest.zip"
