@@ -22,7 +22,7 @@
 - name: Download NextCloud
   unarchive:
     src: "{{nextcloud_download_url}}"
-    dest: /data/wwwroot/nextcloud
+    dest: /data/wwwroot
     remote_src: yes
 
 - name: Rename dir name
