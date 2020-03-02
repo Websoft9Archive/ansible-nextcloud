@@ -26,14 +26,14 @@
 
 ## 本项目安装的是 Nextcloud 最新版吗？
 
-本项目通过下载[Nextcloud源码](https://github.com/nextcloud/server/releases)进行安装，其中版本号存储在：[role/nextcloud/default/main.yml](/roles/nextcloud/defaults/main.yml)
+本项目通过下载[Nextcloud源码](https://github.com/nextcloud/server/releases)进行安装，其中下载链接存储在：[role/nextcloud/default/main.yml](/roles/nextcloud/defaults/main.yml)，可根据需求更改[main.yml 文件](/roles/nextcloud/defaults/main.yml) 中的 ```nextcloud_download_url``` 来安装指定版本。
 
 ```
-#NextCloud版本，需定期维护
-nextcloud_version: v18.0.0
+#NextCloud下载链接，需定期更新维护
+nextcloud_download_url: "https://download.nextcloud.com/server/releases/nextcloud-18.0.1.zip"
 ```
 
-如果你想修改版本号，请先查看 Nextcloud 仓库 [tags](https://github.com/moodle/nextcloud/tags) 标签值，再修改上面的 `nextcloud_version` 变量值。
+如果你想修改版本号，请先查看 Nextcloud 仓库 [releases](https://github.com/moodle/nextcloud/releases) 下载链接，再修改 [role/nextcloud/default/main.yml](/roles/nextcloud/defaults/main.yml) 文件中的 `nextcloud_download_url` 变量值。
 
 我们会定期检查版本，并测试官方版本的可用性，以保证用户可以顺利安装最新版。
 
