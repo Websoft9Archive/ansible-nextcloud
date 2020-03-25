@@ -133,3 +133,9 @@ Websoft9 提供的 Nextcloud 部署包内置了 OnlyOffice Document Server(Docke
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-setonlyoffice-websoft9.png)
    > 图中涂抹处应修改为**服务器公网IP**
 5. 返回到首页，刷新或重新登录，然后单击 Office 文件即可在线预览和编辑。
+
+## 使用移动端
+
+Nextcloud 支持移动端，使用步骤如下：
+1. [下载](https://nextcloud.com/install)移动端
+2. [设置](https://docs.nextcloud.com/android/)移动端到服务器的连接
