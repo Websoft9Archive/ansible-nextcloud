@@ -35,10 +35,7 @@
 - src: http://github.com/websoft9dev/role_end
   version: master
 
-- src: http://github.com/websoft9dev/role_lamp
-  version: master
-
-- src: http://github.com/websoft9dev/role_lnmp
+- src: http://github.com/websoft9dev/role_runtime
   version: master
 
 - src: http://github.com/websoft9dev/role_docker
