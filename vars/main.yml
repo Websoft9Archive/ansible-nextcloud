@@ -7,6 +7,9 @@ mysql_root_password: "123456"
 phpmyadmin_mysql_password: "123456"
 php_version: "7.2"
 
+docker_applications: 
+  - onlyofficedocumentserver
+
 # 生成应用数据库和用户
 mysql_databases:
  - name: nextcloud
