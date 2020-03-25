@@ -32,7 +32,7 @@
 
     onlyoffice_select:
       '1': True
-      '2': ''
+      '2': False
 
     nextcloud_webs: "{{webs_select[webs_selection]}}" 
     nextcloud_onlyoffice: "{{onlyoffice_select[onlyoffice_selection]}}" 
