@@ -75,6 +75,9 @@ Redis logs file: */var/log/redis/redis.log*
 组件版本号可以通过云市场商品页面查看。但部署到您的服务器之后，组件会自动进行更新导致版本号有一定的变化，故精准的版本号请通过在服务器上运行命令查看：
 
 ```shell
+# Check all components version
+sudo cat /data/logs/install_version.txt
+
 # Linux Version
 lsb_release -a
 

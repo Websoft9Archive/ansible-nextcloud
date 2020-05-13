@@ -72,6 +72,9 @@ These ports should be opened for this application:
 You can see the version from product page of Marketplace. However, after being deployed to your server, the components will be automatically updated, resulting in a certain change in the version number. Therefore, the exact version number should be viewed by running the command on the server:
 
 ```shell
+# Check all components version
+sudo cat /data/logs/install_version.txt
+
 # Linux Version
 lsb_release -a
 

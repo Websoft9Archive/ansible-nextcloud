@@ -42,7 +42,7 @@
     w9panel_set_infrastructure: "{{infrastructure_select[webs_selection]}}" 
     w9panel_set_apps: 
       - NextCloud
-    preend_certbot: True
+    
   
   pre_tasks:
     - include_vars: roles/role_cloud/vars/cloud_download_url.yml

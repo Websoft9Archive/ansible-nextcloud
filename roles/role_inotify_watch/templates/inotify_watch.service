@@ -1,7 +1,0 @@
-[Unit]        
-Description=Watch Default Website Directory
-After=network.target       
-[Service]
-ExecStart=/usr/local/bin/inotify_watch                                                                                                                 
-[Install]                      
-WantedBy=multi-user.target  
