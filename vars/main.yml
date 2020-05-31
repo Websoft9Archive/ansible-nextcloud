@@ -22,17 +22,9 @@ mysql_users:
    host: localhost
    priv: 'nextcloud.*:ALL'
 
-# 初始化MySQL root密码
+# init all users password for MySQL
 init_db: 
-    mysql:
-      user: root
-      password: "123456"  
-
-# 应用数据库信息
-init_application:
-  nextcloud:
-    service: php-fpm
-    database: nextcloud 
-    database_user: nextcloud
-    database_host: localhost
-    database_password: "123456"
+  mysql:
+    admin: root
+    users: ["nextcloud"]
+    password: "123456"
