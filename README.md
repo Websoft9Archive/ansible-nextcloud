@@ -26,7 +26,7 @@
 
 ## 本项目安装的是 Nextcloud 最新版吗？
 
-本项目通过下载[Nextcloud源码](https://github.com/nextcloud/server/releases)进行安装，保证安装的是最新版本。其中下载链接存储在：[role/nextcloud/default/main.yml](/roles/nextcloud/defaults/main.yml)，可根据需求更改[main.yml 文件](/roles/nextcloud/defaults/main.yml) 中的 ```nextcloud_download_url``` 来安装指定版本。
+本项目通过下载[Nextcloud源码](https://download.nextcloud.com/server/releases/)进行安装，保证安装的是最新版本。其中下载链接存储在：[role/nextcloud/default/main.yml](/roles/nextcloud/defaults/main.yml)，可根据需求更改[main.yml 文件](/roles/nextcloud/defaults/main.yml) 中的 ```nextcloud_download_url``` 来安装指定版本。
 
 如果你想修改版本号，请先查看 Nextcloud 仓库 [releases](https://download.nextcloud.com/server/releases/) 下载链接，再修改 [role/nextcloud/default/main.yml](/roles/nextcloud/defaults/main.yml) 文件中的 `nextcloud_download_url` 变量值。
 
