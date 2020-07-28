@@ -1,9 +1,10 @@
 #全局
 region: "0"
+common_os_support: ["CentOS", "Amazon"]
 
-preend_certbot: True
+apache_certbot: True
+nginx_certbot: True
 
-# MySQL 版本和默认密码
 mysql_version: "5.7"       
 mysql_root_password: "123456"
 phpmyadmin_mysql_password: "123456"
@@ -12,17 +13,14 @@ php_version: "7.2"
 docker_applications: 
   - onlyofficedocumentserver
 
-# 生成应用数据库和用户
 mysql_databases:
  - name: nextcloud
-   encoding: utf8
  
 mysql_users:
  - name: nextcloud
    host: localhost
    priv: 'nextcloud.*:ALL'
 
-# init all users password for MySQL
 init_db: 
   mysql:
     admin: root
