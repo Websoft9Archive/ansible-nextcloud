@@ -1,7 +1,7 @@
 ---
 #引入PHP运行环境元数据，并初始化
 
-- include_vars: roles/role_php-fpm/vars/php_runtime_meta.yml
+- include_vars: roles/role_php/vars/php_runtime_meta.yml
 
 #Create var for this playbook
 - set_fact:
