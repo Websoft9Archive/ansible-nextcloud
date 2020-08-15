@@ -5,9 +5,13 @@ common_os_support: ["CentOS", "Amazon"]
 apache_certbot: True
 nginx_certbot: True
 
+mysql_remote: True
 mysql_version: "5.7"       
 mysql_root_password: "123456"
-phpmyadmin_mysql_password: "123456"
+
+docker_applications: 
+  - phpmyadmin
+
 php_version: "7.2"
 
 docker_applications: 
