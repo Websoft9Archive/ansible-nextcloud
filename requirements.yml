@@ -17,13 +17,13 @@
 - src: http://github.com/websoft9dev/role_mysql
   version: master
 
-- src: http://github.com/websoft9dev/role_php-fpm
+- src: http://github.com/websoft9dev/role_php
   version: master
 
 - src: http://github.com/websoft9dev/role_inotify_watch
   version: master
 
-- src: http://github.com/websoft9dev/role_phpmyadmin
+- src: http://github.com/websoft9dev/role_docker
   version: master
 
 - src: http://github.com/websoft9dev/role_init_password
