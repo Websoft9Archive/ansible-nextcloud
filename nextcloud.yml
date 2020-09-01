@@ -58,12 +58,11 @@
     - {role: role_mysql, tags: "role_mysql"}
     - {role: role_php, tags: "role_php"}
     - {role: role_inotify_watch, tags: "role_inotify_watch"}
-    - {role: role_runtime, tags: "role_runtime"}
     - {role: role_docker, tags: "role_docker"}
     - {role: role_9panel, tags: "role_9panel"}
     - {role: role_redis, tags: "role_redis"}
     - {role: role_docker, tags: "role_docker", when: nextcloud_onlyoffice}
     - {role: nextcloud, tags: "nextcloud"}
-    - {role: role_init_password, tags: "role_init_password"}
+    - {role: role_init, tags: "role_init"}
     - {role: role_preend, tags: "role_preend"}
     - {role: role_end, tags: "role_end"}
