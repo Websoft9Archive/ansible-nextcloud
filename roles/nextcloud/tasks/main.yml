@@ -66,9 +66,6 @@
 - block:
   - name: change owner&group
     shell: chown -R {{nextcloud_owner}}:{{nextcloud_owner}} /data/wwwroot
-
-  - name: Copy Apache or Nginx vhost configuration
-    template: src={{nextcloud_vhost_src}} dest={{nextcloud_vhost_dir}}
     
   - name: restart Apache or Nginx
     service: name={{nextcloud_service}} state=restarted enabled=yes
