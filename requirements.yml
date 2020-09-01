@@ -32,9 +32,6 @@
 - src: http://github.com/websoft9dev/role_end
   version: master
 
-- src: http://github.com/websoft9dev/role_runtime
-  version: master
-
 - src: http://github.com/websoft9dev/role_docker
   version: master
  
