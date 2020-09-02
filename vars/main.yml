@@ -4,7 +4,6 @@ common_os_support: ["CentOS", "Amazon"]
 
 apache_certbot: True
 nginx_certbot: True
-apache_appname: "nextcloud"
 
 mysql_remote: True
 mysql_version: "5.7"       
