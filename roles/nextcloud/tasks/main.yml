@@ -28,9 +28,6 @@
 - name: Rename dir name
   shell: cd /data/wwwroot; if [ ! -d "{{nextcloud_name}}" ]; then mv *{{nextcloud_name}}* {{nextcloud_name}}; fi
 
--  name: Set OPCache for NextCloud
-   copy: src=opcache.ini dest=/etc/php.d/opcache.ini
-
 - name: Permission occ
   file:
     path: /data/wwwroot/nextcloud/occ
