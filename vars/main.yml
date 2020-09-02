@@ -13,7 +13,7 @@ docker_applications:
   - phpmyadmin
   - onlyofficedocumentserver
 
-php_version: "7.2"
+php_version: "7.4"
   
 mysql_databases:
  - name: nextcloud
