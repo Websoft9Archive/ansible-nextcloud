@@ -5,7 +5,7 @@ If you have completed the Nextcloud deployment on Cloud Platform, the following 
 ## Preparation
 
 1. Get the **Internet IP** on your Cloud Platform
-2. Check you **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the TCP:80 is allowed
+2. Check you **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the **TCP:80** and **TCP:9002** is allowed
 3. Make a domain resolution on your DNS Console if you want to use domain for Nextcloud
 
 ## Nextcloud Installation Wizard
@@ -26,8 +26,10 @@ If you have completed the Nextcloud deployment on Cloud Platform, the following 
 6. Go to Nextcloud's Marketplace, get more extensions  
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
 
-7.Visit URL *https://Internet IP:9003* to check **OnlyOffice Document Server** been installed
+7. Visit URL *https://Internet IP:9002* to check **OnlyOffice Document Server** been installed
    ![](http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/Websoft9/DocsPicture/zh/onlyoffice/onlyoffice-documentserver-websoft9.png)
+
+8. Complete [Nextcloud preview and edit](/solution-more.md#nextcloud-preview-and-edit) settings (Optional)
 
 > Refer to [Nextcloud admin_manual](https://docs.nextcloud.com/server/latest/admin_manual/) to get more details
 

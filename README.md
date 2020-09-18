@@ -54,11 +54,11 @@ wget -N https://raw.githubusercontent.com/Websoft9/ansible-linux/master/scripts/
 
 文档链接：https://support.websoft9.com/docs/nextcloud/zh
 
+## License
+
+本项目是开源项目，采用 LGPL3.0 开源协议。补充条款：不允许在公有云的云市场上售卖通过本项目安装后直接或间接制作的镜像。
+
 ## FAQ
 
 - 命令脚本部署与镜像部署有什么区别？请参考：[镜像部署-vs-脚本部署](https://support.websoft9.com/docs/faq/zh/bz-product.html#镜像部署-vs-脚本部署)
 - 本项目支持在 Ansible Tower 上运行吗？支持
-
-## To do
-* 添加 Nginx 支持
-* 添加 Ubuntu,AmazonLinux 支持

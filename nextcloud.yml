@@ -1,4 +1,3 @@
-## 部署
 - name: Nextcloud
   hosts: all
   become: yes
@@ -13,13 +12,6 @@
       private: no
       default: 1
 
-    - name: 'onlyoffice_selection'
-      prompt: "\nDo you want to install OnlyOffice documentserver? [ 1/2 ] \n\n
-      1: Yes\n
-      2: No\n"
-      private: no
-      default: 1
-
   vars:
 
     webs_select:
@@ -30,25 +22,15 @@
       '1': 'LAMP'
       '2': 'LNMP'
 
-    onlyoffice_select:
-      '1': True
-      '2': False
-
-    runtime_name: "{{infrastructure_select[webs_selection] | lower}}" 
     nextcloud_webs: "{{webs_select[webs_selection]}}" 
-    nextcloud_onlyoffice: "{{onlyoffice_select[onlyoffice_selection]}}" 
     w9panel_webs: "{{webs_select[webs_selection]}}" 
     w9panel_set_infrastructure: "{{infrastructure_select[webs_selection]}}" 
     w9panel_set_apps: 
-      - NextCloud
+      - Nextcloud
     
-  
   pre_tasks:
-    - include_vars: roles/role_cloud/vars/cloud_download_url.yml
-      when: region == '1' or region == 1
-
     - debug:
-        msg: NextCloud will be installed on {{w9panel_set_infrastructure}}, OS is {{ansible_distribution}}, region code is {{region}}
+        msg: NextCloud will be installed on {{w9panel_set_infrastructure}}, OS is {{ansible_distribution}}
 
   roles:
     - {role: role_common, tags: "role_common"}
@@ -61,7 +43,7 @@
     - {role: role_docker, tags: "role_docker"}
     - {role: role_9panel, tags: "role_9panel"}
     - {role: role_redis, tags: "role_redis"}
-    - {role: role_docker, tags: "role_docker", when: nextcloud_onlyoffice}
+    - {role: role_docker, tags: "role_docker"}
     - {role: nextcloud, tags: "nextcloud"}
     - {role: role_init, tags: "role_init"}
     - {role: role_preend, tags: "role_preend"}

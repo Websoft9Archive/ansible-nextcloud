@@ -3,7 +3,12 @@ region: "0"
 common_os_support: ["CentOS", "Amazon"]
 
 apache_certbot: True
+apache_appname: "nextcloud"
+apache_vhost_mode: "www"
+
 nginx_certbot: True
+nginx_appname: "nextcloud"
+nginx_vhost_mode: "www"
 
 mysql_remote: True
 mysql_version: "5.7"       
@@ -20,7 +25,6 @@ mysql_databases:
  
 mysql_users:
  - name: nextcloud
-   host: localhost
    priv: 'nextcloud.*:ALL'
 
 init_db: 

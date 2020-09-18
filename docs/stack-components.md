@@ -52,7 +52,17 @@ Redis logs file: */var/log/redis/redis.log*
 
 ### Docker
 
-OnlyOffice Document Server on Docker included in this stack
+These tools installed on Docker for you:
+
+#### OnlyOffice Document Server
+
+OnlyOffice Document Server directory：*/data/apps/onlyofficedocumentserver*  
+OnlyOffice Document Server docker compose file：*/data/apps/onlyofficedocumentserver/docker-compose.yml*  
+
+####  phpMyAdmin
+
+phpMyAdmin directory：*/data/apps/phpmyadmin*  
+phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml*  
 
 ## Ports
 
@@ -65,7 +75,8 @@ These ports should be opened for this application:
 | MySQL | 3306 | Remote connect MySQL | Optional |
 | HTTP | 80 | HTTP requests for Nextcloud | Required |
 | HTTPS | 443 | HTTPS requests Nextcloud | Optional |
-| Docker | 9003 | OnlyOffice Document Server on Docker | Optional |
+| TCP | 9002 | OnlyOffice Document Server on Docker | Optional |
+| TCP | 9090 | phpMyAdmin on Docker | Optional |
 
 ## Version
 

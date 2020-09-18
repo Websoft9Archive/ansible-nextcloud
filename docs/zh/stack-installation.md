@@ -5,12 +5,12 @@
 ## 准备
 
 1. 在云控制台获取您的 **服务器公网IP地址** 
-2. 在云控制台安全组中，检查 **Inbound（入）规则** 下的 **TCP:80** 端口是否开启
+2. 在云控制台安全组中，检查 **Inbound（入）规则** 下的 **TCP:80** 和 **TCP:9002** 端口是否开启
 3. 若想用域名访问 Nextcloud，请先到 **域名控制台** 完成一个域名解析
 
 ## Nextcloud 安装向导
 
-1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://Internet IP*, 就进入引导首页
+1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://服务器公网IP*, 进入引导首页
 
 2. 系统首先要求设置一个管理员账号，选择 Nextcloud 的数据库存储方式，建议选择【MySQL】    
 
@@ -26,8 +26,10 @@
 6. 进入Marketplace，扩展更多的功能
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
    
-7. 浏览器访问网址：*https://Internet IP:9003* 查看是否安装 **OnlyOffice Document Server**
+7. 浏览器访问网址：*https://Internet IP:9002* 查看是否安装 **OnlyOffice Document Server**
    ![](http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/Websoft9/DocsPicture/zh/onlyoffice/onlyoffice-documentserver-websoft9.png)
+
+8. [设置文档预览与编辑](/zh/solution-more.md#nextcloud-文件预览与编辑)功能（非必要）
 
 > 需要了解更多 Nextcloud 的使用，请参考官方文档：[Nextcloud admin_manual](https://docs.nextcloud.com/server/latest/admin_manual/)
 

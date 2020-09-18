@@ -1,16 +1,19 @@
 # Username and Password
 
-These accounts are required for Nextcloud image installation and configuration
+Use the **SSH** to connect your Server and run the command `sudo cat /credentials/password.txt` to get the username and password of this deployment solution.
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
+
+Here are the required accounts and passwords for this application installation and configuration
 
 ## Nextcloud
 
-Administrator account is set by yourselft at the time of Nextcloud installation wizard
+Administrator account is set by yourself at the time of Nextcloud installation wizard
 
 ## MySQL
 
 * Administrator username: *`root`*
-* Administrator password: stored in the file of your server instance: */credentials/password.txt*. You use the **online SSH interface on Cloud Console** and run the command `cat /credentials/password.txt` to get the database password
-   ![Run the cat command](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
+* Administrator password: stored in the file of your server instance: */credentials/password.txt*. 
 
 > If you want to log in MySQL, refer to [MySQL Web interface Management](/admin-mysql.md)
 

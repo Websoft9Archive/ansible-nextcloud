@@ -123,16 +123,26 @@ Nextcloud 的程序和数据文件默认均存在系统盘，你要转移到数�
 
 Nextcloud 自身是不能对 Office 文件进行预览或编辑的，需要集成外部的 Office 文档编辑和预览服务才可以具备这样的功能。  
 
-Websoft9 提供的 Nextcloud 部署包内置了 OnlyOffice Document Server(Docker版) ，此软件可以用于给 Nextcloud 提供文档预览与编辑服务，具体设置步骤如下：
+Websoft9 提供的 Nextcloud 部署包内置了 OnlyOffice Document Server(Docker版) ，此软件为 Nextcloud 提供文档预览与编辑服务，具体设置步骤如下：
 
-1. 开启服务器安全组的 9003 端口
-2. 登录到 Nextcloud ，单击左上角齿轮图标，点击【应用】
+1. 在云控制台安全组中，检查 **TCP:9002** 端口是否开启
+
+2. 使用本地电脑浏览器测试文档服务是否可用：打开网址：*http://服务器公网IP:9002*，会看到 OnlyOffice Document Server 正在运行的提示 
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/onlyoffice/onlyoffice-dkisrunning-websoft9.png)
+   
+   > 如果计划使用 HTTPS 访问 OnlyOffice Document Server，需给它绑定域名并设置 HTTPS
+
+4. 登录到 Nextcloud ，单击左上角齿轮图标，点击【应用】
 	![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-olpreview-1-websoft9.png)
-3. 找到【ONLYOFFICE】插件，安装它
-4. 安装完成后，找到**设置**页面，对 ONLYOFFICE 进行如图所示的设置（[参考官方文档](https://api.onlyoffice.com/editors/nextcloud)）
+
+5. 找到【ONLYOFFICE】插件，安装它
+
+6. 安装完成后，找到**设置**页面，对 ONLYOFFICE 进行如图所示的设置（[参考官方文档](https://api.onlyoffice.com/editors/nextcloud)）
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-setonlyoffice-websoft9.png)
+
    > 图中涂抹处应修改为**服务器公网IP**
-5. 返回到首页，刷新或重新登录，然后单击 Office 文件即可在线预览和编辑。
+
+7. 返回到首页，刷新或重新登录，然后单击 Office 文件即可在线预览和编辑。
 
 ## 使用移动端
 
