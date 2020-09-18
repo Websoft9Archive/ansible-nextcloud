@@ -127,6 +127,6 @@ Nextcloud can't preview and edit Office document itself, you need to integrate d
 	 ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-olpreview-1-websoft9.png)
 3. Find the app【ONLYOFFICE】 and install it
 4. Set the 【ONLYOFFICE】
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-setonlyoffice-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-setonlyoffice-websoft9.png)
    > The smear in the figure should be modified to **Internet IP**
 5. Refresh the Nextcloud, test the preview and edit function of documentation
