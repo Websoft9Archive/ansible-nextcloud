@@ -23,7 +23,7 @@ If you have completed the Nextcloud deployment on Cloud Platform, the following 
 5. Nextcloud Console
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backend-websoft9.png)
 
-6. Go to Nextcloud's Marketplace, get more extensions  
+6. Go to Marketplace, get more extensions  
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-app-websoft9.png)
 
 7. Visit URL *https://Internet IP:9002* to check **OnlyOffice Document Server** been installed
