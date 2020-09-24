@@ -3,8 +3,6 @@
 
 本项目是由 [Websoft9](https://www.websoft9.com) 研发的 [Nextcloud](https://nextcloud.com/) 自动化安装程序，开发语言是 Ansible。使用本项目，只需要用户在 Linux 上运行一条命令，即可自动化安装 Nextcloud，让原本复杂的安装过程变得没有任何技术门槛。  
 
-本项目是开源项目，采用 LGPL3.0 开源协议。
-
 ## 配置要求
 
 安装本项目，确保符合如下的条件：
@@ -14,13 +12,13 @@
 | 操作系统       | CentOS7.x       |  可选  |
 | 公有云| AWS, Azure, 阿里云, 华为云, 腾讯云 | 可选 |
 | 私有云|  KVM, VMware, VirtualBox, OpenStack | 可选 |
-| 服务器配置 | 最低1核1G，安装时所需的带宽不低于10M | 建议采用按量100M带宽 |  
+| 服务器配置 | 测试环境最低1核2G，安装时所需的带宽不低于10M | 建议采用按量100M带宽 |  
 
 更多配置要求参考官方文档：[《System Requirements》](https://docs.nextcloud.com/server/18/admin_manual/installation/source_installation.html)
 
 ## 组件
 
-包含的核心组件为：可选 Nextcloud,Apache或Nginx,PHP，MySQL等
+包含的核心组件为：Nextcloud + Apache/Nginx（可选） + MySQL + PHP + ONLYOFFICE Document Server + Docker
 
 更多请见[参数表](/docs/zh/stack-components.md)
 
