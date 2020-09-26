@@ -1,13 +1,15 @@
 # Parameters
 
-The Nextcloud deployment package contains a sequence software (referred to as "components") required for Nextcloud to run. The important information such as the component name, installation directory path, configuration file path, port, version, etc. are listed below.
+The Nextcloud deployment package contains a sequence software (referred to as "components") required for Nextcloud to run. Below list the important information, such as the component name, installation directory path, configuration file path, port, version, etc.
 
 ## Path
 
 ### Nextcloud
 
 Nextcloud installation directory: */data/wwwroot/nextcloud*  
-Nextcloud configuration file: * /data/wwwroot/nextcloud/config/config.php*   
+Nextcloud configuration file: */data/wwwroot/nextcloud/config/config.php*  
+ 
+> (Nextcloud configuration file contains database connection configuration. If you change username and password of MySQL, remember to make corresponding modification in this file.)  
 
 ### PHP
 
@@ -66,21 +68,22 @@ phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml*
 
 ## Ports
 
-You can control(open or shut down) ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** of your Cloud Server whether the port can be accessed from Internet.
+You can control (open or shut down) ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/tech-instance.html)** of your Cloud Server to decide whether the port can be accessed from Internet.
 
 These ports should be opened for this application:
 
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
-| MySQL | 3306 | Remote connect MySQL | Optional |
-| HTTP | 80 | HTTP requests for Nextcloud | Required |
-| HTTPS | 443 | HTTPS requests Nextcloud | Optional |
+| TCP | 80 | HTTP requests for Nextcloud | Required |
+| TCP | 443 | HTTP requests for Nextcloud | Optional |
+| TCP | 3306 | Remote connect to MySQL | Optional |
 | TCP | 9002 | OnlyOffice Document Server on Docker | Optional |
 | TCP | 9090 | phpMyAdmin on Docker | Optional |
 
 ## Version
 
-You can see the version from product page of Marketplace. However, after being deployed to your server, the components will be automatically updated, resulting in a certain change in the version number. Therefore, the exact version number should be viewed by running the command on the server:
+You can see the version on product pages of Marketplace. However, after being deployed to your server, the components will be updated automatically, resulting in a certain change in the version number. Therefore, run the command on the server to view the exact version number. 
+ 
 
 ```shell
 # Check all components version

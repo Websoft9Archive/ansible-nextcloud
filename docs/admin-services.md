@@ -1,6 +1,6 @@
 # Start or Stop the Services
 
-These commands you must know when you using the Nextcloud of Websoft9
+These commands are required when you using the Nextcloud of Websoft9
 
 ### Apache
 

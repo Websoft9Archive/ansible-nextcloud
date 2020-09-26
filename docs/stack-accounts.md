@@ -4,7 +4,7 @@ Use the **SSH** to connect your Server and run the command `sudo cat /credential
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
 
-Here are the required accounts and passwords for this application installation and configuration
+Here are the required accounts and passwords for this application installation and configuration.
 
 ## Nextcloud
 
@@ -20,12 +20,12 @@ Administrator account is set by yourself at the time of Nextcloud installation w
 ## Linux
 
 * Host Name: Internet IP or Public IP of your Instance
-* Connect by: Online SSH on Cloud Console or SFTP/SSH tools on your local computer
-* Password: It was set by yourself when created instance
+* Connect by: Online SSH on Cloud Console or SFTP/SSH client tools
+* Password: It was set by yourself when created instance.
 * Username: Different Cloud Platform has differences
    |  Cloud Platform   |  Administrator Username   | Other |
    | --- | --- | --- |
-   |  Azure   |  It was set by yourself when created instance   | [How to enable root access?](https://support.websoft9.com/docs/azure/server-login.html#sample2-enable-the-root-username) |
+   |  Azure   |  It was set by yourself when created VM  | [How to enable root access?](https://support.websoft9.com/docs/azure/server-login.html#sample2-enable-the-root-username) |
    |  AWS CentOS   |  centos   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
    |  AWS Ubuntu   |  ubuntu   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
    |  AWS AmazonLinux   |  ec2-user   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |

@@ -1,23 +1,36 @@
 # Troubleshooting
 
-We collect the most common troubleshooting of using Nextcloud for your reference:
+If you're having trouble with running Nextcloud, here is a quick guide to solve most common problems.
 
-> Many troubleshooting is closely related to the Server, if you can confirm troubleshooting is related to Cloud Platform, please refer to [Cloud Platform Documentation](https://support.websoft9.com/docs/faq/tech-instance.html)
+> Most faults about the Instance is closely related to the Instance provider, Cloud Platform. Provided you're sure the fault is caused by Cloud Platform, refer to [Cloud Platform Documentation](https://support.websoft9.com/docs/faq/tech-instance.html).
 
-#### Nextcloud Redirects Error
+#### Nextcloud Redirects Error?
 
-Check your `.htaccess` file in your application root directory, make sure there not any cycle redirects settings
+Check your `.htaccess` file in your application root directory, make sure there is no any cycle redirects settings
 
-#### Database service could not be started?
+#### After the domain configuration, find page layout confusion or the picture cannot be displayed?
 
-Insufficient disk space, insufficient memory, and configuration file errors can make database service could not be started  
+This problem occurs if you install through IP, and then bind the domain name. To solve it, please change the IP address to the domain name in Nextcloud [Confuguration file](/stack-components.html#nextcloud).
+
+#### When install plug-in, there is an error "you don't have permission to access /admin/index.php"
+
+Change DOSPageCount 2 into DOSPageCount 12 in /etc/httpd/conf.d/mod_evasive.conf
+
+#### Can't connect database after change the password of database?
+
+This problem occurs if you complete Nextcloud installation wizard, then change the password of database by phpMyAdmin. To solve it, please change the password of corresponding database in Nextcloud [Confuguration file](/stack-components.html#nextcloud).
+
+#### Can't start Apache httpd service?
+
+Please locate the reason by analyzing the log file: */var/log/httpd*
+
+#### Can't start the database service?
+
+Insufficient disk space and memory, incorrect configuration file may cause the failure to start the service.
 
 It is recommended to first check through the command.
 
 ```shell
-# restart mysql service
-systemctl restart mysql
-
 # view disk space
 df -lh
 
@@ -25,22 +38,4 @@ df -lh
 free -lh
 ```
 
-#### phpMyAdmin page access blank?
 
-Please try another browser, such as chrome or firefox. If the phpMyAdmin can be opened normally before, and now appears to be incomplete or blank, it is recommended to clean up the browser cache, cookies and other information
-
-#### PhpMyAdmin Timeout Errors
-
-If you try to import a zipped database, you might see a timeout error because phpMyAdmin takes too long to execute the script.To fix this:
-
-- Set the max_execution_time of `php.ini` to larger value
-- Try to import the file again.
-
-Remember to change the ExecTimeLimit setting back to its original value once the import process ends.
-
-#### Website pictures loading very slowly?
-
-Please make sure that your brandwith of Server is more than 5M
-
-#### Apache httpd service restart error
-Please make sure the vhost.conf is correct for you, and you can track and analyze log files from */var/log/httpd*

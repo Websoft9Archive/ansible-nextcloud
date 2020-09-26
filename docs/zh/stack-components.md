@@ -42,9 +42,9 @@ MySQL 可视化管理地址: *http://服务器公网IP/phpmyadmin*，用户名�
 
 ### phpMyAdmin
 
-phpMyAdmin installation directory: */data/apps/phpmyadmin*  
-phpMyAdmin configuration file: */data/apps/phpmyadmin/config.inc.php*   
-phpMyAdmin vhost configuration file: */etc/httpd/conf.d/phpMyAdmin.conf* or */etc/nginx/php.conf*  
+phpMyAdmin 安装目录: */data/apps/phpmyadmin*  
+phpMyAdmin 配置文件: */data/apps/phpmyadmin/config.inc.php*   
+phpMyAdmin 虚拟主机配置文件: */etc/httpd/conf.d/phpMyAdmin.conf* or */etc/nginx/php.conf*  
 
 ### Docker
 
@@ -52,19 +52,19 @@ phpMyAdmin vhost configuration file: */etc/httpd/conf.d/phpMyAdmin.conf* or */et
 
 #### OnlyOffice Document Server
 
-OnlyOffice Document Server directory：*/data/apps/onlyofficedocumentserver*  
-phpMyAdmin docker compose file：*/data/apps/onlyofficedocumentserver/docker-compose.yml*  
+OnlyOffice Document Server 目录：*/data/apps/onlyofficedocumentserver*  
+phpMyAdmin 容器编排文件：*/data/apps/onlyofficedocumentserver/docker-compose.yml*  
 
 ####  phpMyAdmin
 
-phpMyAdmin directory：*/data/apps/phpmyadmin*  
-phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml*  
+phpMyAdmin 目录：*/data/apps/phpmyadmin*  
+phpMyAdmin 容器编排文件：*/data/apps/phpmyadmin/docker-compose.yml*  
 
 ### Redis
 
-Redis configuration file: */etc/redis.conf*  
-Redis data directory: */var/lib/redis*  
-Redis logs file: */var/log/redis/redis.log*
+Redis 配置文件: */etc/redis.conf*  
+Redis 数据目录: */var/lib/redis*  
+Redis 日志文件: */var/log/redis/redis.log*
 
 
 ## 端口号

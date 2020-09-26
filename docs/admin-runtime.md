@@ -17,11 +17,11 @@ In addition to using the default settings of the Nextcloud deployment package, y
 - Add new Nextcloud or PHP application
 - Configure the SSL/HTTPS
 - Modify the root directory
-- Binding Domain Name  
+- Bind Domain Name  
 ...
 
 To complete these tasks, you need to refer to [Environmental Guidelines](/admin-runtime.md#guide)
 
-In addition, you may think about how Nextcloud works in these environments? Please refer to the hierarchy diagram below
+In addition, you may think about how Nextcloud works in these environments? Please refer to the hierarchy diagram below.
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/lamp/lamp-imagestacks-websoft9.png)

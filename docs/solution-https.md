@@ -1,8 +1,10 @@
 # SSL/HTTPS
 
-Nextcloud deployment package has installed the SSL module of Nginx and open Certificate Authority **[Let's Encrypt](https://letsencrypt.org/)** for you configure the HTTPS quickly and conveniently.
+Before setting, you have to complete binding domain and make sure you can access by HTTP.
 
-> In addition to the vhost configuration file, HTTPS settings do not need to modify any files in Nginx
+Nextcloud deployment package has installed the SSL module of Nginx and open Certificate Authority **[Let's Encrypt](https://letsencrypt.org/)** for you to configure the HTTPS quickly.
+
+> Except for the vhost configuration file, HTTPS settings do not need to modify any other files in Nginx.
 
 ## Quick configuration
 
@@ -17,7 +19,7 @@ If you have applied for a commercial certificate, complete the HTTPS configurati
 LAMP means that **Apache** for Web Server
 
 1. Upload your certificate to the directory of your instance: */data/cert* 
-2. Edit the vhost configuration file: */etc/httpd/conf.d/vhost.conf* 
+2. Open the vhost configuration file: */etc/httpd/conf.d/vhost.conf* 
 3. Insert the **HTTPS template**  segment `<VirtualHost *:443>--</VirtualHost>` into `vhost.conf`
    ``` text
    #-----HTTPS template start------------
@@ -63,4 +65,4 @@ LEMP means that **Nginx** for Web Server
 
 ## Special Guide
 
-For details on configuring HTTPS pre-conditions, HTTPS configuration segment templates, precautions, detailed steps, and troubleshooting, refer to the [HTTPS Special Guide](https://support.websoft9.com/docs/faq/tech-https.html#nginx) provided by Websoft9 
+If failed to set HTTPS by taking the above steps, please refer to the [HTTPS Special Guide](https://support.websoft9.com/docs/faq/tech-https.html#nginx) provided by Websoft9 for details on configuring HTTPS pre-conditions, HTTPS configuration segment templates, precautions, detailed steps, and troubleshooting.

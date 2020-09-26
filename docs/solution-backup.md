@@ -6,61 +6,64 @@ sidebarDepth: 3
 
 ## Why
 
-Users with experience in Cloud Server operation and maintenance understand the truth: "IT systems can't maintain 100% stability for a long time. Any system may fail, but the probability of failure is different and the degree of harm is different."
+Users with experience in Cloud Server operation and maintenance understand the necessity of backup. It's impossible for IT systems to maintain 100% stability for a long time. The truth is that any system may fail, but only the probability of failure and the degree of harm differs.
 
-When system failure, we first seek the help of a professional to quickly repair and recovery it, but unfortunately, some failure cannot be solved smoothly or even in the expected time period.
+When a failure occurs, we may first turn to a professional for help, but unfortunately, some failure cannot be solved as quickly as we expected, and even it's insoluble.
 
-Obviously, there is a backup is so important, it can guarantee that the system can be restored to the normal state through the existing backup file when the failure occurs, which means that the huge loss due to the unrecoverable can be avoided.
+Obviously, a backup is necessary when comes to a failure. The existing backup file helps to repair the failed system, which means the huge loss due to irrecoverability can be avoided.
 
-> Must develop the habit of backup, there is no luck
+> Remember to develop the habit of backup. It's a great and useful way to help repair and recovery.
 
 ## How
 
-From the specific backup object, due to the existence of four backup objects on the server: **operating system, environment software, database and application**, each object may have unpredictable failures that cannot be solved as expected.
+As there are four objects on the server to back up, including **operating system, environment software, database and application**. and each object may have unpredictable failures that cannot be solved as expected, we suggest to take the following two necessary backup measures:
 
-Based on the backup object, we believe that the following two backup measures are necessary:
+### Automation Backup for Instance  
 
-### Automation Backup for Instance
 
-Automation Backups for Instance is using the **Snapshot** or **Cloud Server Backup Service** on your Cloud Platform, A snapshot is a full, read-only copy of a disk. You can take a snapshot of an OS or data disk to use as a backup, or to troubleshoot instance issues.
+Automation backup for Instance is completed based on **Snapshot** or **Cloud Server Backup Service** on your Cloud Platform. A snapshot is a full, read-only copy of a disk, which backs up the data of a disk at a certain point in time and can have a key recovery. You can take a snapshot of an OS or data disk to use as a backup, or to troubleshoot instance issues.
+
+View the following list about this kind of backup.
 
 ```
-- Backup scope: All data on a Disk
+- Backup scope: All data on a disk including operating system, software environment, database and applications
 - Backup effect: Very Good
-- Backup frequency: Automatic backup per hour if you need
-- Recovery methond: One key recovery on Cloud platform
+- Backup frequency: Automatic backup per hour/day/week as you need
+- Recovery method: One key recovery on Cloud platform
 - Skill requirement: Very easy 
-- Automation or Manual: Fully automated on backup strategy
+- Automation or Manual: Fully automated backup after setting strategy
 ```
 
-Different Cloud Platform's snapshot settings slightly different, refer to [Cloud platform backup solution](https://support.websoft9.com/docs/faq/tech-instance.html)
+Different Cloud Platform's snapshot settings slightly differ. Refer to [Cloud platform backup solution](https://support.websoft9.com/docs/faq/tech-instance.html).
 
-### Manual backup for application
+### Manual backup for application  
 
-Manual backup for application is based on the **Exporting source code and database of application** to achieve a minimized backup scheme.
+Manual backups for applications is to achieve a minimized backup scheme by **Exporting source code and database of application**.
+
+View the following list about this kind of backup.
 
 ```
 - Backup scope: Source code and database of application
 - Backup effect: Good
 - Backup frequency: You can operate when you need
-- Recovery methond: Import
+- Recovery method: Import
 - Skill requirement: Easy 
 - Automation: manual
 ```
-The general manual backup operation steps are as follows:
+The general steps for manual backup are as follows:
 
 1. Compress and download the entire */data/wwwroot/nextcloud* directory by SFTP 
 2. Compress and download the entire */data/wwwroot/nextcloud/data* directory by SFTP 
 3. Export Nextcloud's database by [phpMyAdmin](/admin-mysql.md)
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/phpmyadmin/phpmyadmin-export-websoft9.png)
-4. Put the source code file, data file and database file in the same folder, named according to the date
-5. Backup completed
+4. Put the source code file, data file and database file in the same folder and name it according to the date.
+5. Backup is completed.
 
 ### Nextcloud online backup
 
-This section provides Nextcloud online backup solution
+This section provides Nextcloud online backup solution.
 
 1. Log in Nextcloud console as administrator, install **[OwnBackup](https://apps.nextcloud.com/apps/ownbackup)** 
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backupapps-websoft9.png)
-2. Go to【Admin】>【OwnBackup】, start backup, and you can restore it also
+2. Go to【Admin】>【OwnBackup】, start backup, and you can restore it.
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-backupapp002-websoft9.png)
