@@ -19,7 +19,7 @@ If you have applied for a commercial certificate, complete the HTTPS configurati
 LAMP means that **Apache** for Web Server
 
 1. Upload your certificate to the directory of your instance: */data/cert* 
-2. Open the vhost configuration file: */etc/httpd/conf.d/vhost.conf* 
+2. Edit the vhost configuration file: */etc/httpd/conf.d/vhost.conf* 
 3. Insert the **HTTPS template**  segment `<VirtualHost *:443>--</VirtualHost>` into `vhost.conf`
    ``` text
    #-----HTTPS template start------------

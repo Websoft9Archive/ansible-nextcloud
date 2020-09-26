@@ -1,11 +1,11 @@
 # Deployment
 
-**Deployment is to copy the Nextcloud pre-packaged online to your Cloud Server**. For example, after the user subscribe Nextcloud on the Cloud Platform, the Platform will automatically copy the Nextcloud to the corresponding Cloud Server.
+**Deployment is to copy the pre-installed Nextcloud package online to your Cloud Server**. For example, after the user subscribe Nextcloud on the Cloud Platform, the Platform will automatically copy the Nextcloud to the corresponding Cloud Server.
 
 - If Nextcloud has been deployed, go to [Initial Installation](/stack-installation.md) to complete the operation.
 - If not, first you need to deploy Nextcloud to your cloud server.
 
-We offer two deployment scenarios for Nextcloud and deployment results are the same.
+We offer two deployment schemes for Nextcloud and deployment results are the same.
 
 ## Deploy by Image
 
@@ -16,12 +16,12 @@ For users with experience with cloud servers, deploy by image equates to "one-cl
 Websoft9 published [Nextcloud image](https://apps.websoft9.com/nextcloud) on Cloud Platform, and there are three methods for your deployment:
 
 * When **Create New Instance** , select the Nextcloud image as the system boot template.
-* When **Subscribe Nextcloud** on Marketplace, the system will promote you to create a new instance for this image in the meantime.
+* When you **Subscribe Nextcloud** on Marketplace, the system will promote you to create a new instance for this image in the meantime.
 * When **Re-install OS** for you instance, you can replace the existing image with a Nextcloud image.
 
 ## Deploy by Script
 
-**Deploy by Script** means running a script on your cloud instance to pull pre-installed packages online to your instance and configure it at the same time.
+**Deploy by Script** means running a script on your cloud instance to pull pre-installed package online to your instance and configure it at the same time.
 
 Websoft9 provide the [Nextcloud ansible automation script](https://github.com/Websoft9/ansible-nextcloud) on Github. If you are familiar with Ansible, you can deploy the Nextcloud to the instance automatically.
 

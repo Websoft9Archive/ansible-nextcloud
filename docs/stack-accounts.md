@@ -4,7 +4,7 @@ Use the **SSH** to connect your Server and run the command `sudo cat /credential
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
 
-Here are the required accounts and passwords for this application installation and configuration.
+Here are the required username and passwords for this application installation and configuration.
 
 ## Nextcloud
 

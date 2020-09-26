@@ -124,7 +124,7 @@ Nextcloud source code and data is stored in system disk by default, you can tran
    ```
 8. Set the object storage to boot automatically. (Different cloud platform need different operations)
 
-> The **mount** command is very difficult for users, and there is a risk of copy failure if the data is exceed 10G.8. 
+> The **mount** command is very difficult for users, and there is a risk of copy failure if the data is exceed 10G.
 
 
 ## Nextcloud preview and edit

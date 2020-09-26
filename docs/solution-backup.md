@@ -20,7 +20,6 @@ As there are four objects on the server to back up, including **operating system
 
 ### Automation Backup for Instance  
 
-
 Automation backup for Instance is completed based on **Snapshot** or **Cloud Server Backup Service** on your Cloud Platform. A snapshot is a full, read-only copy of a disk, which backs up the data of a disk at a certain point in time and can have a key recovery. You can take a snapshot of an OS or data disk to use as a backup, or to troubleshoot instance issues.
 
 View the following list about this kind of backup.
@@ -48,7 +47,7 @@ View the following list about this kind of backup.
 - Backup frequency: You can operate when you need
 - Recovery method: Import
 - Skill requirement: Easy 
-- Automation: manual
+- Automation: Manual
 ```
 The general steps for manual backup are as follows:
 

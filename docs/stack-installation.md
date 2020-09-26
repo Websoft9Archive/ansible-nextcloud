@@ -4,13 +4,13 @@ If you have completed the Nextcloud deployment on Cloud Platform, follow the ste
 
 ## Preparation
 
-1. Get the **Internet IP** on your Cloud Platform
+1. Get the **Internet IP** on your Cloud Platform.
 2. Check you **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the **TCP:80** and **TCP:9002** is allowed
 3. Make a domain resolution on your DNS Console if you want to use domain for Nextcloud.
 
 ## Nextcloud Installation Wizard
 
-1. Use local Chrome or Firefox to access the URL *https://domain* or *https://Internet IP* and enter home page.
+1. Use local Chrome or Firefox to access the URL *https://domain* or *https://Internet IP*.
 
 2. Create administrator account, then set 【Storage & Database】, suggest you select 【MySQL】.
 
@@ -35,7 +35,7 @@ If you have completed the Nextcloud deployment on Cloud Platform, follow the ste
 
 ## Q&A
 
-#### I can't visit the start page of Nextcloud?
+#### Can't visit the start page of Nextcloud?
 
 Your TCP:80 of Security Group Rules is not allowed, so there's no response from Chrome or Firefox.
 
