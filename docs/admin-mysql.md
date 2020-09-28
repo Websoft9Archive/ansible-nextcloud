@@ -5,7 +5,7 @@ Nextcloud deployment package includes MySQL and Web-GUI tool phpMyAdmin for MySQ
 Follow the steps below to use it:
 
 1. Login Cloud Console, make sure the **TCP:80** port is allowed on **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)**
-2. Using the Chrome or FireFox to access URL *http://Internet IP/phpmyamdin*
+2. Use the Chrome or FireFox to access URL *http://Internet IP/phpmyamdin*
   ![log in phpMyadmin](https://libs.websoft9.com/Websoft9/DocsPicture/en/mysql/mysql-login-websoft9.png)
 3. Enter username and password of MySQL. ([Don't know password?](/stack-accounts.md))
 4. Start to manage MySQL now.

@@ -105,7 +105,7 @@ Websoft9 Nextcloud stack supports the deployment of multiple applications (websi
 #### What's the difference between Deployment and Installation?
 
 - Deployment is a process of installing and configuring a series of software to the server in a different order, which is a complex system engineering.  
-- Installation is the process of starting the initial wizard after the application is prepared.  
+- Installation is the process of starting the initial wizard to complete configuration after the application is prepared.  
 - Installation is simpler than deployment. 
 
 #### What's Cloud Platform?
