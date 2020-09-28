@@ -9,7 +9,7 @@ The Nextcloud deployment package contains a sequence software (referred to as "c
 Nextcloud installation directory: */data/wwwroot/nextcloud*  
 Nextcloud configuration file: */data/wwwroot/nextcloud/config/config.php*  
  
-> (Nextcloud configuration file contains database connection configuration. If you change username and password of MySQL, remember to make corresponding modification in this file.)  
+> Nextcloud configuration file contains database connection configuration. If you change username and password of MySQL, remember to make corresponding modification in this file.  
 
 ### PHP
 

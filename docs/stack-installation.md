@@ -5,7 +5,7 @@ If you have completed the Nextcloud deployment on Cloud Platform, follow the ste
 ## Preparation
 
 1. Get the **Internet IP** on your Cloud Platform.
-2. Check you **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the **TCP:80** and **TCP:9002** is allowed
+2. Check **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the **TCP:80** and **TCP:9002** is allowed.
 3. Make a domain resolution on your DNS Console if you want to use domain for Nextcloud.
 
 ## Nextcloud Installation Wizard

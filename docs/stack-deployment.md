@@ -13,7 +13,7 @@ We offer two deployment schemes for Nextcloud and deployment results are the sam
 
 For users with experience with cloud servers, deploy by image equates to "one-click deployment". 
 
-Websoft9 published [Nextcloud image](https://apps.websoft9.com/nextcloud) on Cloud Platform, and there are three methods for your deployment:
+Websoft9 published [Nextcloud image](https://apps.websoft9.com/nextcloud) on Cloud Platform, and there are three methods to deploy:
 
 * When **Create New Instance** , select the Nextcloud image as the system boot template.
 * When you **Subscribe Nextcloud** on Marketplace, the system will promote you to create a new instance for this image in the meantime.
