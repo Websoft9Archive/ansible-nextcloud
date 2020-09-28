@@ -124,12 +124,12 @@ Nextcloud source code and data is stored in system disk by default, you can tran
    ```
 8. Set the object storage to boot automatically. (Different cloud platform need different operations)
 
-> The **mount** command is very difficult for users, and there is a risk of copy failure if the data is exceed 10G.
+> The **mount** command is very difficult for users, and there is a risk of copy failure if the data exceeds 10G.
 
 
 ## Nextcloud preview and edit
 
-Nextcloud can't preview and edit Office document itself, you need to integrate document Server service for Nextcloud to implement this function:
+Nextcloud can't preview and edit Office document itself, you need to integrate Document Server service for Nextcloud to implement this function:
 
 1. Enable the **TCP:9002** port on **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)**
 2. Log in to Nextcloud console, go to 【Apps】page
@@ -139,3 +139,9 @@ Nextcloud can't preview and edit Office document itself, you need to integrate d
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-setonlyoffice-websoft9.png)
    > The smear in the figure should be modified to **Internet IP**
 5. Refresh the Nextcloud, test the preview and edit function of documentation.
+
+## Mobile apps
+
+Steps for using Nextcloud mobile apps are as follows:
+1. [Download](https://nextcloud.com/install) mobile apps.
+2. [Connect](https://docs.nextcloud.com/android/) to your Nextcloud server.

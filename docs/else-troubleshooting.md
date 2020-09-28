@@ -12,7 +12,7 @@ Check your `.htaccess` file in your application root directory, make sure ther
 
 This problem occurs if you install through IP, and then bind the domain name. To solve it, please change the IP address to the domain name in Nextcloud [Confuguration file](/stack-components.html#nextcloud).
 
-#### When install plug-in, there is an error "you don't have permission to access /admin/index.php"
+#### When install plug-in, is there an error "you don't have permission to access /admin/index.php"?
 
 Change DOSPageCount 2 into DOSPageCount 12 in /etc/httpd/conf.d/mod_evasive.conf
 

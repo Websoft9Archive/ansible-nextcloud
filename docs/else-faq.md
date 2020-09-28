@@ -17,16 +17,11 @@ UTF-8
 
 Yes, includes: Nextcloud Desktop Client, Nextcloud Android App, Nextcloud iOS App
 
-
-#### Nextcloud can preview and edit Office document?
-
-No, you need to integrate Document Service for it. [How to set?](/solution-more.html#nextcloud-preview-and-edit)
-
 #### Nextcloud can integrate external storage?
 
 Yes.
 
-#### How can Nextcloud view&edit file online?
+#### How can Nextcloud view & edit file online?
 
 You should complete the [OnlyOffice setting](/solution-more.md#nextcloud-preview-and-edit) on your Nextcloud.
 
@@ -37,7 +32,7 @@ LEMP is using Nginx as Web Server for your Nextcloud.
 
 #### Can I use the RDS of Cloud Provider for Nextcloud?
 
-You can use the RDS for Nextcloud if you need, and just need to modify the database configuration section in the wp-config.php
+You can use the RDS for Nextcloud if you need, and just need to modify the [database configuration](/stack-components.html#nextcloud) section in the wp-config.php
 
 #### Where is the database connection configuration of Nextcloud?
 
@@ -51,7 +46,7 @@ Yes, access Nextcloud by *http://Internet IP*
 
 The password is stored in the server related file: `/credentials/password.txt`
 
-#### Is there a web-base GUI database management tools?
+#### Is there a web-base GUI database management tool?
 
 Yes, phpMyAdmin is on it, access by *http://Internet IP/phpmyadmin*
 
@@ -59,17 +54,13 @@ Yes, phpMyAdmin is on it, access by *http://Internet IP/phpmyadmin*
 
 Edit the  [phpMyAdmin configuration file](/stack-components.md#phpmyadmin), replace `Require all granted` with `Require ip 192.160.1.0`, then restart Apache service.
 
-#### Is it possible to modify the source path of Nextcloud?
-
-Yes, modify it by [vhost configuration file](/stack-components.md#apache)
-
 #### Can I configure this Nextcloud if I don't understand the Linux command?
 
 Yes, you can use GUI tool WinSCP to start Nextcloud, no commands.
 
 #### Do I need to change the owner(group) for the files which I upload by SFTP?
 
-No, you don't need to change them because LAMP/LNMP was set to changed automaticly
+No, you don't need to change them because LAMP/LNMP was set to change automatically.
 
 #### How to modify the path of Nextcloud?
 
