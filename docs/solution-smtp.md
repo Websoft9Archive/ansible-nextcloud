@@ -15,7 +15,7 @@ Taking **SendGrid's SMTP Service** as an example, refer to the following steps t
    SMTP username: websoft9smpt
    SMTP password: #fdfwwBJ8f    
    ```
-2. Log in Nextcloud console as administrator, go to 【Admin】>【Additianal settings】>【Email server】, select smtp for send mode
+2. Log in Nextcloud console as administrator, go to 【Admin】>【Additianal settings】>【Email server】, select SMTP for send mode
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/nextcloud/nextcloud-setsmpt001-websoft9.png)
 
 3. Fill in the suitable smtp configuration
