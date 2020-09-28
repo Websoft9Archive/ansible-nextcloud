@@ -1,6 +1,7 @@
 # Deployment
 
-**Deployment is to copy the pre-installed Nextcloud package online to your Cloud Server**. For example, after the user subscribe Nextcloud on the Cloud Platform, the Platform will automatically copy the Nextcloud to the corresponding Cloud Server.
+**Deployment is to copy the pre-installed Nextcloud package online to your Cloud Server**. 
+For example, after the user subscribe Nextcloud on the Cloud Platform, the Platform will automatically copy the Nextcloud to the corresponding Cloud Server.
 
 - If Nextcloud has been deployed, go to [Initial Installation](/stack-installation.md) to complete the operation.
 - If not, first you need to deploy Nextcloud to your cloud server.
