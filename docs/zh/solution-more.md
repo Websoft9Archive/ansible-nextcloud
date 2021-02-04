@@ -144,6 +144,8 @@ Websoft9 提供的 Nextcloud 部署包内置了 OnlyOffice Document Server(Docke
 
 7. 返回到首页，刷新或重新登录，然后单击 Office 文件即可在线预览和编辑。
 
+如果连接 ONLYOFFICE 时，Nextcloud 强制要求 ONLYOFFICE 需配置 HTTPS，请参考：[OnlyOffice Document Server 域名绑定和 HTTPS](http://support.websoft9.com/docs/onlyoffice/zh/solution-documentserver.html#域名绑定) 相关章节。
+
 ## 使用移动端
 
 Nextcloud 支持移动端，使用步骤如下：
