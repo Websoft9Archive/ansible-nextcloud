@@ -16,7 +16,7 @@ mysql_root_password: "123456"
 
 docker_applications: 
   - phpmyadmin
-  - onlyofficedocumentserver
+  - onlyofficedocs
 
 php_version: "7.4"
   
