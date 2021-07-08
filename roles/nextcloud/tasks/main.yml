@@ -69,3 +69,7 @@
 
   - name: restart php-fpm
     service: name=php-fpm state=restarted
+
+- name: Check nextcloud version
+  shell: >
+    sudo echo "nextcloud version:" $(cat /data/wwwroot/nextcloud/version.php |grep OC_VersionString |awk -F "'" '{print $2}') |sudo tee -a /data/logs/install_version.txt 
