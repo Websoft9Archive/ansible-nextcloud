@@ -56,13 +56,14 @@
   shell: |
     occ config:system:set \
     memcache.local \
-    --value '\OC\Memcache\APCu'
+    --value '\OC\Memcache\Redis'
     occ config:system:set \
     memcache.locking \
     --value '\OC\Memcache\Redis'
     occ config:system:set \
     redis host\
     --value='127.0.0.1'
+    occ config:system:set \
     redis port\
     --value=6379
 

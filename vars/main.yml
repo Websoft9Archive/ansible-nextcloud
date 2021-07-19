@@ -8,9 +8,16 @@ mysql_root_password: "123456"
 php_version: "7.4"
 
 php_extra_modules_centos:
-  - php-gpm
+  - php-devel
+  - php-mysqlnd
+  - php-pdo_dblib
+  - php-gmp
+
 php_extra_modules_ubuntu:
-  - php-gpm
+  - php-dev
+  - php-mysql
+  - php-sqlite3
+  - php-gmp
 
 apache_certbot: True
 apache_appname: "nextcloud"
