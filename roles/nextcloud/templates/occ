@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd /data/wwwroot/nextcloud
+sudo -u {{nextcloud_owner}} /usr/bin/php /data/wwwroot/nextcloud/occ "$@"

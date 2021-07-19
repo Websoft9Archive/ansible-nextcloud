@@ -28,22 +28,48 @@
 - name: Rename dir name
   shell: cd /data/wwwroot; if [ ! -d "{{nextcloud_name}}" ]; then mv *{{nextcloud_name}}* {{nextcloud_name}}; fi
 
-- name: Permission occ
-  file:
-    path: /data/wwwroot/nextcloud/occ
-    state: file
-    mode: "u+x,g+x"
+- name: Create the occ Helper Script
+  template:
+    src: occ
+    dest: /usr/bin/occ
+    mode: u+x,g+x,o+x
+ 
+- name: Change directory ownership and group ownership
+  shell: chown -R {{nextcloud_owner}}:{{nextcloud_owner}} /data/wwwroot
 
-- name: copy config
-  copy: src=config.php  dest=/data/wwwroot/nextcloud/config
+- name: Install NextCloud (Automaticall generate configuration files)
+  shell: |
+        occ maintenance:install \
+        --database "mysql" \
+        --database-name "{{nextcloud_db_name}}" \
+        --database-user "{{nextcloud_db_user}}" \
+        --database-pass "{{nextcloud_db_password}}" \
+        --admin-user "{{nextcloud_admin_user}}" \
+        --admin-pass "{{nextcloud_admin_password}}"
 
-- name: Set NextCloud Job
-  command: php -f /data/wwwroot/nextcloud/cron.php
+- name: Configure public_ip as NextCloud Domains 
+  shell: |
+    public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
+    occ config:system:set trusted_domains 1 --value="$public_ip"
 
-- name: NextCloud cron job
+- name: Configure Caching and File Locking
+  shell: |
+    occ config:system:set \
+    memcache.local \
+    --value '\OC\Memcache\APCu'
+    occ config:system:set \
+    memcache.locking \
+    --value '\OC\Memcache\Redis'
+    occ config:system:set \
+    redis host\
+    --value='127.0.0.1'
+    redis port\
+    --value=6379
+
+- name: Set Up a NextCloud cron Job 
   cron:
-    name: "nextcloud cron job"
-    minute: "*/15"
+    name: "Nextcloud cron"
+    minute: "*/5"
     hour: "*"
     day: "*"
     month: "*"

@@ -1,6 +1,16 @@
-#全局
+# Global
 region: "0"
-common_os_support: ["CentOS", "Amazon"]
+
+mysql_remote: True
+mysql_version: "8.0"       
+mysql_root_password: "123456"
+
+php_version: "7.4"
+
+php_extra_modules_centos:
+  - php-gpm
+php_extra_modules_ubuntu:
+  - php-gpm
 
 apache_certbot: True
 apache_appname: "nextcloud"
@@ -10,16 +20,10 @@ nginx_certbot: True
 nginx_appname: "nextcloud"
 nginx_vhost_mode: "www"
 
-mysql_remote: True
-mysql_version: "5.7"       
-mysql_root_password: "123456"
-
 docker_applications: 
-  - phpmyadmin
   - onlyofficedocs
+  - phpmyadmin
 
-php_version: "7.4"
-  
 mysql_databases:
  - name: nextcloud
  
@@ -27,8 +31,20 @@ mysql_users:
  - name: nextcloud
    priv: 'nextcloud.*:ALL'
 
+# init all users password for MySQL
 init_db: 
   mysql:
     admin: root
     users: ["nextcloud"]
-    password: "123456"
+    password: "123456" 
+    config_paths:
+      - /data/wwwroot/nextcloud/config/config.php
+
+init_application:
+  nextcloud:
+    username: admin
+    password: "admin"
+    commands: 
+      - sudo echo -e "$new_password\n$new_password\n" | occ user:resetpassword admin
+      - public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
+      - occ config:system:set trusted_domains 1 --value="$public_ip"
