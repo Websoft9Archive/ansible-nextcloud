@@ -39,13 +39,13 @@
 
 - name: Install NextCloud (Automaticall generate configuration files)
   shell: |
-        occ maintenance:install \
-        --database "mysql" \
-        --database-name "{{nextcloud_db_name}}" \
-        --database-user "{{nextcloud_db_user}}" \
-        --database-pass "{{nextcloud_db_password}}" \
-        --admin-user "{{nextcloud_admin_user}}" \
-        --admin-pass "{{nextcloud_admin_password}}"
+    occ maintenance:install \
+    --database "mysql" \
+    --database-name "{{nextcloud_db_name}}" \
+    --database-user "{{nextcloud_db_user}}" \
+    --database-pass "{{nextcloud_db_password}}" \
+    --admin-user "{{nextcloud_admin_user}}" \
+    --admin-pass "{{nextcloud_admin_password}}"
 
 - name: Configure public_ip as NextCloud Domains 
   shell: |
