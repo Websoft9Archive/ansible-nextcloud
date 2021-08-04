@@ -132,17 +132,23 @@ Websoft9 提供的 Nextcloud 部署包内置了 OnlyOffice Document Server(Docke
    
    > 如果计划使用 HTTPS 访问 OnlyOffice Document Server，需给它绑定域名并设置 HTTPS
 
-4. 登录到 Nextcloud ，单击左上角齿轮图标，点击【应用】
+3. 登录到 Nextcloud ，单击右上角上角齿轮图标，点击【应用】
 	![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-olpreview-1-websoft9.png)
 
-5. 找到【ONLYOFFICE】插件，安装它
+4. 找到【ONLYOFFICE】插件，安装它
 
-6. 安装完成后，找到**设置**页面，对 ONLYOFFICE 进行如图所示的设置（[参考官方文档](https://api.onlyoffice.com/editors/nextcloud)）
+  > 可能因为服务器位于中国大陆地区，网络原因在上述第 3 步不能显示应用列表，需手动安装 ONLYOffice 插件：
+  > - 可以到 Nextcloud [官方应用商店](https://apps.nextcloud.com/apps/onlyoffice/releases?platform=22#22)下载
+  > - 下载到本地后，解压，通过FTP上传到服务器 Nextcloud 应用目录：/data/wwwroot/nextcloud/apps
+  > - 登录Nextcloud后台，进入应用中心，启用 ONLYOffice 即可进入下一步操作，开启文档在线预览和编辑
+  > ![onlyoffice](https://libs.websoft9.com/Websoft9/blog/tmp/nextcloud/zh/nextcloud-onlyoffice-enable-websoft9.png)
+
+5. 安装完成后，找到**设置**页面，对 ONLYOFFICE 进行如图所示的设置（[参考官方文档](https://api.onlyoffice.com/editors/nextcloud)）
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-setonlyoffice-websoft9.png)
 
    > 图中涂抹处应修改为**服务器公网IP**
 
-7. 返回到首页，刷新或重新登录，然后单击 Office 文件即可在线预览和编辑。
+6. 返回到首页，刷新或重新登录，然后单击 Office 文件即可在线预览和编辑。
 
 如果连接 ONLYOFFICE 时，Nextcloud 强制要求 ONLYOFFICE 需配置 HTTPS，请参考：[OnlyOffice Document Server 域名绑定和 HTTPS](http://support.websoft9.com/docs/onlyoffice/zh/solution-documentserver.html#域名绑定) 相关章节。
 
