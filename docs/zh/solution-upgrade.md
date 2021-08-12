@@ -23,9 +23,9 @@ apt update && apt upgrade -y
 > 本部署包已预配置一个用于自动更新的计划任务。如果希望去掉自动更新，请删除对应的Cron
 
 
-## Nextcloud 升级
+## Nextcloud 自助升级
 
-Nextcloud提供了非常人性化的升级入口，根据系统的更新提示既可以完成主版本、插件的更新。
+Nextcloud 提供了非常人性化的升级功能，根据系统的更新提示既可以完成主版本、插件的更新。
 
 > 在升级之前请做好服务器的快照备份，这个是必须的步骤，因为谁都无法保证升级100%成功。
 
@@ -34,10 +34,13 @@ Nextcloud提供了非常人性化的升级入口，根据系统的更新提示�
 主程序升级与插件升级略有差异，具体参考如下：
 
 1. 登录 Nextcloud 后台，进入【管理】>【基本设置】，若有更新请点击【打开更新管理器】按钮
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-openupdater-websoft9.png)
+   ![Nextcloud 升级](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-openupdater-websoft9.png)
+
 2. 进入 Updater（更新管理器）
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-updater-websoft9.png)
+   ![Nextcloud 升级](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-updater-websoft9.png)
+
 3. 点击【Start update】开始更新
+
 4. 系统进入自动化升级过程，下载和升级过程比较长，请耐心等待
 
 > 由于升级过程会下载最新版本，Nextcloud的下载服务器在国外，若下载不成功，需要不定期尝试
@@ -47,9 +50,37 @@ Nextcloud提供了非常人性化的升级入口，根据系统的更新提示�
 升级步骤参加如下：
 
 1. 登录 Nextcloud 后台，进入【应用】，在应用列表中找到需更新的应用
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-updatelist-websoft9.png)
+   ![Nextcloud 升级](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nextcloud/nextcloud-updatelist-websoft9.png)
 
 2. 点击【更新】按钮，耐心等待更新
+
 3. 所有更新完成后，更新清单会显示“所有应用都是最新的”
 
 > 如果升级过程出现问题，例如：无法下载升级包/没有读写权限，请确保网络是通的/Nextcloud目录具有读写权限
+
+
+## Nextcloud 手工升级
+
+有时候由于网络问题，上面的基于升级界面的升级会由于网络下载速度太慢，导致升级失败。  
+
+此时，可以考虑采用如下的手工升级方案：
+
+1. 将 Nextcloud 的 data, config, apps 目录临时复制到服务器其他目录下
+
+2. 上传 Nextcloud 安装目录下的所有文件
+   ```
+   rm -rf /data/wwwroot/nextcloud/*
+   ```
+3. 将本地下载的 Nextcloud 源码（除 config, apps 目录之外）上传到 /data/wwwroot/nextcloud 目录
+
+4. 将第1步备份的几个目录还原到 */data/wwwroot/nextcloud* 中
+
+5. 使用 *php occ* 命令进行升级处理
+   ```
+   cd /data/wwwroot/nextcloud
+   php occ upgrade
+   ```
+
+6. 登录到 Nextcloud 后台界面，启用所需的插件
+
+7. 手工升级完成

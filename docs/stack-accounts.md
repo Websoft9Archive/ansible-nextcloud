@@ -23,12 +23,12 @@ Administrator account is set by yourself at the time of Nextcloud installation w
 * Connect by: Online SSH on Cloud Console or SFTP/SSH client tools
 * Password: It was set by yourself when created instance.
 * Username: Different Cloud Platform has differences
-   |  Cloud Platform   |  Administrator Username   | Other |
-   | --- | --- | --- |
-   |  Azure   |  It was set by yourself when created VM  | [How to enable root access?](https://support.websoft9.com/docs/azure/server-login.html#sample2-enable-the-root-username) |
-   |  AWS CentOS   |  centos   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
-   |  AWS Ubuntu   |  ubuntu   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
-   |  AWS AmazonLinux   |  ec2-user   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
-   |  Alibaba Cloud, HUAWEI CLOUD, Tencent Cloud |  root   |
+   |  Cloud Platform   | OS |  Administrator Username   | Other |
+   | --- | --- | --- | --- |
+   |  Azure   | ALL |  It was set by yourself when created instance.   | [How to enable root access?](https://support.websoft9.com/docs/azure/server-login.html#sample2-enable-the-root-username) |
+   |  AWS  | CentOS |  centos   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
+   |  AWS   | Amazon Linux |  ec2-user   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
+   |  AWS   | Ubuntu |  ubuntu   | [How to enable root access?](https://support.websoft9.com/docs/aws/server-login.html#sample2-enable-the-root-username) |
+   |  Alibaba Cloud, HUAWEI CLOUD, Tencent Cloud | ALL |  root   ||
 
 If don't remember the password of Linux, you should reset password on Cloud Console
