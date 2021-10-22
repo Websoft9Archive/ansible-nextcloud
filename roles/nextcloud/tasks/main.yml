@@ -20,10 +20,14 @@
     rm -rf /data/wwwroot/*{{nextcloud_name}}*
 
 - name: Download NextCloud
-  unarchive:
-    src: "{{nextcloud_download_url}}"
-    dest: /data/wwwroot
-    remote_src: yes
+  shell: |
+   cd /data/wwwroot
+   wget {{nextcloud_download_url}} --no-check-certificate
+   unzip latest.zip
+#   unarchive:
+#     src: "{{nextcloud_download_url}}"
+#     dest: /data/wwwroot
+#     remote_src: yes
 
 - name: Rename dir name
   shell: cd /data/wwwroot; if [ ! -d "{{nextcloud_name}}" ]; then mv *{{nextcloud_name}}* {{nextcloud_name}}; fi
