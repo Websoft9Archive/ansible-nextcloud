@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Release nextcloud-v23.0.01  2021-12-09
+### Fixes and Enhancements
+- skip wizard, update to v23.0.0
+- 
 ## Release nextcloud-v22.0-1  2021-7-20
 ### Fixes and Enhancements
 - skip wizard, update to v22.0 #8 
